@@ -1,0 +1,217 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% LaTeX Template for AAMAS-2026 (based on sample-sigconf.tex)
+%%% Prepared by the AAMAS-2026 Publication Chairs based on the version from AAMAS-2025. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% --------------------------------------------------------------------
+% Document class
+% --------------------------------------------------------------------
+%%% == IMPORTANT ==
+%%% Use the first variant below for the final paper (including author information).
+%%% Use the second variant below to anonymize your submission (no author information shown).
+%%% For further information on anonymity and double-blind reviewing, 
+%%% please consult the call for paper information:
+%%% https://cyprusconferences.org/aamas2026/submission-instructions/
+
+%%%% For anonymized submission, use this:
+%\documentclass[sigconf,anonymous]{acm/aamas} 
+
+%%%% For camera-ready, use this:
+% \documentclass[sigconf]{acm/aamas}
+\documentclass[manuscript]{acm/aamas}
+
+% --------------------------------------------------------------------
+% Core packages (many already included by aamas class)
+% --------------------------------------------------------------------
+\usepackage{balance}      % balance columns on the final page
+\usepackage{algorithm}    % algorithm environment
+\usepackage{algorithmic}  % algorithmic typesetting
+\usepackage{float}        % improved float placement control
+\usepackage{tikz}         % graphics and diagrams
+\usetikzlibrary{positioning,shapes,arrows,shadows,fit}
+\usepackage{ctable}       % complex table formatting
+\usepackage{array}        % extended array and tabular
+\usepackage{ulem}         % underlining and strikethrough
+\usepackage{ragged2e}     % improved ragged text alignment
+
+% Custom column type for right-aligned paragraph columns
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
+
+% --------------------------------------------------------------------
+% AAMAS-2026 copyright block (DO NOT CHANGE!)
+% --------------------------------------------------------------------
+\setcopyright{ifaamas}
+\acmConference[AAMAS '26]{Proc.\@ of the 25th International Conference
+on Autonomous Agents and Multiagent Systems (AAMAS 2026)}{May 25 -- 29, 2026}
+{Paphos, Cyprus}{C.~Amato, L.~Dennis, V.~Mascardi, J.~Thangarajah (eds.)}
+\copyrightyear{2026}
+\acmYear{2026}
+\acmDOI{}
+\acmPrice{}
+\acmISBN{}
+
+\definecolor{Orange}{rgb}{1,0.5,0}
+\definecolor{Purple}{rgb}{1,0,1}
+\definecolor{Gray}{rgb}{0.6,0.6,0.6}
+\definecolor{Green}{rgb}{0.1,0.6,0.1}
+\definecolor{Teal}{rgb}{0.0, 0.55, 0.55}
+\definecolor{Pink}{rgb}{1, 0.4, 0.6}
+\definecolor{Blue}{rgb}{0,0,1}
+
+\newcommand{\todo}[1]{\textsf{\textbf{\small \textcolor{Purple}{[[#1]]}}}}
+\newcommand{\todoname}[3]{ \textcolor{#1}{\textsf{\textbf{\small [[#2 says: #3]]}}}}
+\newcommand{\kb}[1]{\todoname{Orange}{Kevin}{#1}}
+\newcommand{\gsh}[1]{\todoname{Green}{Galen}{#1}}
+\newcommand{\samarth}[1]{\todoname{Blue}{Samarth}{#1}}
+\newcommand{\anil}[1]{\textcolor{blue}{#1}}
+\newcommand{\mlwcomment}[1]{\textcolor{blue}{MLW: #1}}
+\newcommand{\adscomment}[1]{\textcolor{Orange}{Aaron: #1}}
+\newcommand{\tool}{MEKH}
+\newcommand{\toolname}{Material Evolution Knowledge Hypergraph}
+\newcommand{\process}{MP-DNF}
+\newcommand{\processname}{Material Processing Dependency Network Framework}
+\newcommand{\Hcal}{\mathcal{H}}
+
+% --------------------------------------------------------------------
+% Submission information
+% --------------------------------------------------------------------
+%%% == IMPORTANT ==
+%%% Use this command to specify your submission number.
+%%% In anonymous mode, it will be printed on the first page.
+\acmSubmissionID{1162}
+
+% --------------------------------------------------------------------
+% Cover page configuration (internal use only)
+% --------------------------------------------------------------------
+% Load geometry only when cover is enabled (may conflict with ACM class)
+\newif\ifusecoverpage
+\usecoverpagetrue              % set \usecoverpagefalse to skip cover
+
+\ifusecoverpage
+  \usepackage{geometry}        % temporary margin adjustments for cover
+\fi
+
+\usepackage{fancyhdr}          % custom page styles
+\usepackage{xcolor}            % color support for branding
+
+% Brand color for cover page footer
+\definecolor{uvaorange}{RGB}{232,119,34}
+
+% Define the 'trcover' pagestyle (logo + footer text)
+\input{coverpage/coverpage_style}
+
+% --------------------------------------------------------------------
+% Author data and venue-specific formatting
+% --------------------------------------------------------------------
+% Centralized author database: defines \AllAuthorData and stub \OneAuthor
+\input{authors_db}
+
+% Per-paper selection: comma-separated list of author IDs, no spaces
+% Authors will appear in the order specified here
+\newcommand{\SelectedAuthors}{1,2,3,4,5,6,7,8,9,10,11}
+
+% ACM/AAMAS-specific author/affiliation formatting
+% Defines \acmauthors using \AllAuthorData + \SelectedAuthors
+\input{acm/formats_acm}
+
+% --------------------------------------------------------------------
+% Title and author metadata
+% --------------------------------------------------------------------
+\newcommand{\PaperTitle}{%
+  An Agentic AI Approach for Material Evolution Knowledge Hypergraph Discovery%
+}
+
+\title{\PaperTitle}
+
+% Populate ACM author and affiliation metadata from shared data
+\acmauthors
+
+% --------------------------------------------------------------------
+% Abstract and executive summary (to be filled by authors)
+% --------------------------------------------------------------------
+% Use this environment for the ACM/AAMAS abstract that appears under the title.
+% Keep it focused on the research contribution, methods, and key results.
+\newcommand{\PaperAbstract}{%
+Supply chain analysis for critical materials often employs top-down methods, tracing backward from finished products. These methods can lack visibility into intermediate dependencies due to proprietary manufacturing and opaque supplier networks. This paper presents a bottom-up agentic AI approach for constructing a ~\toolname{} (\tool{}), an essential building block for supply chain networks that document the transformation of raw materials into advanced technological products.
+
+The approach uses the \processname{} (\process{}), a multi-agent system in which specialized language models iteratively discover, classify, and validate materials and industrial processes. Multiple knowledge sources are integrated via the Model Context Protocol (MCP), including harmonized trade code databases, semantic reference caches, web searches, and structured encyclopedic sources. The resulting networks are represented as directed hypergraphs that capture the multi-input, multi-output nature of industrial processes.
+
+The pipeline begins with seed materials and expands through a documented process, identifying intermediates and transformations, and applying validation based on reference quality. Iterative cycles allow the introduction of new materials, process discovery, validation, and the removal of weakly supported links. A key feature is the explicit identification and tracking of material derivatives, which can be refined in different countries and assigned a unique, harmonized shipping code, supporting more precise supply chain tracking.
+
+Technical contributions include: formalizing supply chain transformations using directed hypergraphs; enabling iterative bottom-up network discovery; deploying LLM agents for scalable extraction and validation; and referencing all process steps for traceability and assessment.
+
+This framework supports mineral pathway analysis, bottleneck detection, and supply chain resilience by revealing alternatives and dependencies that are not readily apparent in top-down mapping. The pipeline, managed through a modular command-line interface, is suited to both research and operational supply chain analysis and construction.
+}
+
+% Use this macro for the internal report executive summary used on the cover page
+% and possibly in an introductory section. Aim at senior leadership and analysts.
+\newcommand{\ExecutiveSummary}{%
+This work introduces a bottom‑up AI framework that maps how raw minerals move through industrial processes to become advanced technologies, providing visibility that traditional top‑down supply chain methods often miss. Instead of relying solely on opaque supplier networks, specialized AI agents systematically discover and validate materials, transformation steps, and intermediate products using multiple trusted data sources. The resulting hypergraph networks expose critical pathways, derivatives, and chokepoints, enabling analysts to spot vulnerabilities, alternative routes, and opportunities for resilience that are not obvious from finished‑product data alone. Delivered as a modular command‑line tool, the system is designed for both research and operational use in mineral pathway analysis, bottleneck detection, and strategic supply chain planning.
+}
+
+% ====================================================================
+% Document body
+% ====================================================================
+\begin{document}
+
+% Coverpage (internal use only; comment out for submission)
+\ifusecoverpage
+  \input{coverpage/insert_coverpage}
+\fi
+
+%%% The following commands remove the headers in your paper. For final 
+%%% papers, these will be inserted during the pagination process.
+
+\pagestyle{fancy}
+\fancyhead{}
+
+
+% Abstract section using the placeholder macro
+\begin{abstract}
+\PaperAbstract
+\end{abstract}
+
+% Construct title section
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\input{introduction}
+\input{related}
+\input{method}
+\input{experiments}
+\input{discussion}
+\input{conclusion}
+
+\section{Code and Data Availability}
+
+The software is available via an anonymized repository for review: \url{https://anonymous.4open.science/r/lia-B773}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%% The acknowledgments section is defined using the "acks" environment
+%%% (rather than an unnumbered section). The use of this environment 
+%%% ensures the proper identification of the section in the article 
+%%% metadata as well as the consistent spelling of the heading.
+
+\begin{acks}
+\end{acks}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%% The next two lines define, first, the bibliography style to be 
+%%% applied, and, second, the bibliography file to be used.
+
+\bibliographystyle{ACM-Reference-Format} 
+\bibliography{references}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\clearpage
+
+
+\end{document}

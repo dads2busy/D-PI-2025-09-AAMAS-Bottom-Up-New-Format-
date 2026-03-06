@@ -1,0 +1,56 @@
+% coverpage/formats_cover.tex
+% Shared cover page: same look for AAAI and ACM, with ordered authors.
+
+% ---------- Build comma-separated author list in \SelectedAuthors order ----------
+% Requires:
+%   \usepackage{etoolbox}
+%   \input{authors_db}        % defines \AllAuthorData and stub \OneAuthor
+%   \newcommand{\SelectedAuthors}{...}  % defined in main_*.tex
+\newcommand{\coverauthors}{%
+  \def\do##1{%
+    \def\TargetID{##1}%
+    % For each target ID, scan all authors and print only the match
+    \renewcommand{\OneAuthor}[7]{%
+      \def\CurrentID{####1}%
+      \ifx\CurrentID\TargetID
+        ####2, %
+      \fi
+    }%
+    \AllAuthorData
+  }%
+  \expandafter\docsvlist\expandafter{\SelectedAuthors}%
+}
+
+% ---------- Cover page content ----------
+\thispagestyle{trcover}
+\vspace*{1em}
+
+\renewcommand{\arraystretch}{1.6}
+
+% Use absolute width and font size so both classes look the same.
+% Assumes US Letter and 1in margins set by geometry/newgeometry.
+{\fontsize{12}{14.4}\selectfont
+ \normalfont
+
+\begin{center}
+\begin{minipage}{6.5in}          % 6.5in block -> 1in left/right margins
+\raggedright
+
+\begin{tabular}{@{}
+  >{\sffamily\bfseries}p{2.5cm}%
+  >{\parindent=0pt\leftskip=0.5em\normalfont}p{\dimexpr6.5in-2.5cm-0.5em\relax}%
+  @{}}
+
+BI TR:      & BI-2025-18 \\
+Date:       & \today \\
+Title:      & \PaperTitle \\
+            & \\
+Authors:    & \coverauthors \\
+            & \\
+%  sDescription:& \ExecutiveSummary
+\\
+
+\end{tabular}
+\end{minipage}
+\end{center}
+} % end fontsize group

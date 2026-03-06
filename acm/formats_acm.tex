@@ -1,0 +1,52 @@
+% formats/formats_acm.tex
+% Formatting for acmart using authors_db.tex.
+%
+% Requires in main_acm.tex:
+%   \usepackage{etoolbox}
+%   \input{authors_db}
+%   \newcommand{\SelectedAuthors}{1,2,3,4}
+%
+% In authors_db.tex:
+%   \providecommand{\OneAuthor}[7]{}  % no-op default
+%   \newcommand{\AllAuthorData}{...}  % your existing data
+
+% ---------- Helper: is an author ID selected? ----------
+% Usage: \IfAuthorSelected{<id>}{<code if yes>}{<code if no>}
+\newcommand{\IfAuthorSelected}[3]{%
+  \def\ResultFlag{0}%
+  \def\TargetID{#1}%
+  \def\do##1{%
+    \def\CurrentID{##1}%
+    \ifx\CurrentID\TargetID
+      \def\ResultFlag{1}%
+    \fi
+  }%
+  \expandafter\docsvlist\expandafter{\SelectedAuthors}%
+  \ifnum\ResultFlag=1
+    #2%
+  \else
+    #3%
+  \fi
+}
+
+% ---------- ACM author block with selection and ordering ----------
+% #1 = ID, #2 = name, #3 = affil index, #4 = institution, #5 = city, #6 = country, #7 = email
+\newcommand{\acmauthors}{%
+  \def\do##1{%
+    \def\TargetID{##1}%
+    \renewcommand{\OneAuthor}[7]{%
+      \def\CurrentID{####1}%
+      \ifx\CurrentID\TargetID
+        \author{####2}%
+        \affiliation{%
+          \institution{####4}%
+          \city{####5}%
+          \country{####6}%
+        }%
+        \email{####7}%
+      \fi
+    }%
+    \AllAuthorData
+  }%
+  \expandafter\docsvlist\expandafter{\SelectedAuthors}%
+}

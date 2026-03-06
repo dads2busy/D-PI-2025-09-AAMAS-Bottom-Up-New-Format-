@@ -1,0 +1,53 @@
+% authors_db.tex
+% Shared author data and affiliation mapping.
+% Requires: \usepackage{etoolbox} in the main preamble.
+
+\providecommand{\OneAuthor}[7]{}  % default no-op; will be redefined by formats
+
+% Data: #1=ID, #2=name, #3=affil-index string (e.g., "1" or "1,2"),
+%       #4=affiliation text, #5=city, #6=country, #7=email
+\newcommand{\AllAuthorData}{%
+  \OneAuthor{1}{Aaron Schroeder}{1}%
+    {Biocomplexity Institute, University of Virginia}%
+    {Charlottesville}{United States}{ads7fg@virginia.edu}%
+  \OneAuthor{2}{Dustin Machi}{1}%
+    {Biocomplexity Institute, University of Virginia}%
+    {Charlottesville}{United States}{dm8qs@virginia.edu}%
+  \OneAuthor{3}{Brian Klahn}{1}%
+    {Biocomplexity Institute, University of Virginia}%
+    {Charlottesville}{United States}{briandk@virginia.edu}%
+  \OneAuthor{4}{Galen S. Harrison}{1}%
+    {Biocomplexity Institute, University of Virginia}%
+    {Charlottesville}{United States}{gh7vp@virginia.edu}%
+  \OneAuthor{5}{Anil Vullikanti}{1}%
+    {Biocomplexity Institute, University of Virginia}%
+    {Charlottesville}{United States}{vsakumar@virginia.edu}%
+  \OneAuthor{6}{Achla Marathe}{1}%
+    {Biocomplexity Institute, University of Virginia}%
+    {Charlottesville}{United States}{achla@virginia.edu}%
+  \OneAuthor{7}{Mandy L. Wilson}{1}%
+    {Biocomplexity Institute, University of Virginia}%
+    {Charlottesville}{United States}{alw4ey@virginia.edu}%
+  \OneAuthor{8}{Margaret Foster}{2}%
+    {National Security Data and Policy Institute, University of Virginia}%
+    {Charlottesville}{United States}{avj6tm@virginia.edu}%
+  \OneAuthor{9}{Philip Potter}{2}%
+    {National Security Data and Policy Institute, University of Virginia}%
+    {Charlottesville}{United States}{pbp2s@virginia.edu}%
+  \OneAuthor{10}{Samarth Swarup}{1}%
+    {Biocomplexity Institute, University of Virginia}%
+    {Charlottesville}{United States}{swarup@virginia.edu}%
+  \OneAuthor{11}{Madhav~V. Marathe}{1}%
+    {Biocomplexity Institute, University of Virginia}%
+    {Charlottesville}{United States}{marathe@virginia.edu}%
+}
+
+
+% Affiliation index -> text mapping used by IAAI/AAAI formatter.
+\newcommand{\AffilText}[1]{%
+  \ifcase#1 %
+    \or Biocomplexity Institute and Initiative, University of Virginia%
+    \or National Security Data \& Policy Institute, University of Virginia%
+    % \or <affil 3> ...
+  \fi
+}

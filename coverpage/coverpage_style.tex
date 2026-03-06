@@ -1,0 +1,21 @@
+% coverpage/coverpage_style.tex
+% Requires in main file, before \input{cover/cover_style}:
+%   \usepackage{fancyhdr}
+%   \usepackage{xcolor}
+%   \definecolor{uvaorange}{RGB}{232,119,34}
+
+\fancypagestyle{trcover}{%
+  \fancyhf{}%
+  % header logo
+  \lhead{%
+    \hspace*{-0.25in}%
+    \includegraphics[height=2.5cm]{coverpage/letterhead_logo.png}%
+  }%
+  \renewcommand{\headrulewidth}{0pt}%
+  % footer
+  \cfoot{%
+    \small
+    Biocomplexity Institute \textbar\ PO Box 400298 \textbar\ Charlottesville, VA 22904\\
+    \textcolor{uvaorange}{biocomplexity.virginia.edu}%
+  }%
+}

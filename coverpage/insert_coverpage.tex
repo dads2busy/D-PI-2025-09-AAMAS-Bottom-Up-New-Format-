@@ -1,0 +1,16 @@
+% coverpage/insert_cover.tex
+% Inserts the cover page with temporary margin adjustments
+% Requires in preamble: \usepackage{geometry}
+
+% Temporarily change margins for the cover page only
+\newgeometry{
+  top=1.65in,
+  bottom=1in,
+  left=1in,
+  right=1in,
+  headheight=60pt,
+  footskip=36pt
+}
+\input{coverpage/formats_cover}
+\clearpage
+\restoregeometry

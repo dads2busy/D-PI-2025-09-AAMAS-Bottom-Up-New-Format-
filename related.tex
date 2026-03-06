@@ -1,0 +1,30 @@
+\section{Related Work}
+\label{sec:related}
+
+The construction of \toolname{}s through bottom-up processes intersects several established research domains, particularly multi-agent systems, knowledge graph construction, and supply chain modeling.
+
+\textbf{Multi-Agent Systems for Supply Chain Management.} 
+Multi-agent systems have been applied to supply chain management to address distributed decision-making and coordination challenges. Jaimez-González and Luna-Ramírez~\cite{jaimez2021towards} proposed a multi-agent architecture for supply chain management that employs specialized agents for different operational functions, demonstrating how agent-based approaches can handle complex coordination tasks. They demonstrate using specialized agents in supply chain contexts, though their focus remains on operational management rather than network discovery. More recently, Farazi~\cite{farazi2025enhancing} examined multi-agent systems combined with machine learning for supply chain resilience, showing how agent coordination can support adaptive responses to disruptions. We apply specialized LLM agents specifically for knowledge extraction and network construction rather than operational coordination.
+
+% What part is "automomous"? -constructing an optimal supply chain?
+Research on autonomous supply chains has further developed multi-agent frameworks for supply chain automation~\cite{santos2024implementing, vanderheijden2024multiagent}. These studies demonstrate agent-based coordination for supply chain operations but do not address the fundamental problem of network discovery and material transformation mapping that our approach tackles. Our contribution differs by focusing agents on iterative knowledge discovery rather than operational execution.
+
+\textbf{Knowledge Graphs and Supply Chain Analysis.} 
+Knowledge graph construction for supply chain management has received increased attention as organizations seek better visibility into complex networks. AlMahri et al.~\cite{almahri2024enhancing} demonstrated how knowledge graphs combined with large language models can support supply chain visibility through automated information extraction from unstructured sources. They extract entity relationships from existing documentation. 
+While this work provides relevant methodology, it does not construct 
+material transformation networks from naturally occurring materials. Liu et al.~\cite{liu2025designing} developed a knowledge-enhanced framework for supply chain information integration that shows how structured knowledge representations can support complex supply chain analysis. While their work focuses on integrating existing supply chain data, our approach addresses the prior challenge of discovering and constructing the underlying transformation networks.
+
+Zhao et al.~\cite{zhao2024systematic} identify challenges of automated knowledge extraction from heterogeneous sources, which directly relates to our approach of using multiple knowledge sources through the Model Context Protocol to construct material evolution graphs.
+
+\textbf{Hypergraph Models for Complex Systems.} 
+Traditional graph representations have limitations when modeling systems with multi-input, multi-output relationships. Recent work on hypergraph models for enterprise supply chain networks~\cite{li2024research} demonstrates how hypergraph structures can capture complex relationships that exceed the capabilities of standard directed graphs. Li et al. show the representation of supply chain relationships as hypergraphs but focus on enterprise-level network modeling rather than material transformation processes. Our approach extends hypergraph applications to material-level transformations where industrial processes naturally involve multiple inputs producing multiple outputs.
+
+Graph neural networks for supply chain analytics have also explored advanced graph structures~\cite{zhang2024graph}, showing how sophisticated graph representations can support complex supply chain analysis tasks. Graph neural network research offers relevant methods for our hypergraph representation but do not address the specific challenges of material transformation network construction.
+
+\textbf{Bottom-Up Network Construction Approaches.} 
+Bottom-up approaches to supply chain modeling have been explored in various contexts. Shapiro~\cite{shapiro1998bottom} provided foundational analysis comparing bottom-up versus top-down approaches to supply chain management, demonstrating that bottom-up methods can reveal system-level properties that top-down approaches miss. This theoretical foundation supports our approach but does not address the computational challenges of automated bottom-up network construction. More recent work by Yang et al.~\cite{yang2023integrating} applied bottom-up modeling to building material networks, showing how starting from base materials and following transformation processes can construct comprehensive networks. Their work validates the bottom-up approach for material systems but focuses on construction materials rather than broader industrial transformation networks.
+
+The limitations of top-down supply chain analysis have been empirically demonstrated by Baldwin et al.~\cite{baldwin2023hidden}, who showed that conventional backward-tracing approaches significantly underestimate supply chain dependencies due to hidden intermediates. Their findings provide empirical justification for bottom-up approaches but do not propose computational solutions for automated network construction.
+
+\textbf{Research Gaps and Positioning.} 
+Existing approaches to supply chain network construction remain largely manual and do not scale to comprehensive material transformation mapping. We address this limitation through specialized LLM agents that discover and validate material transformations iteratively. Prior work has not combined multi-agent systems with knowledge graph construction, and specifically knowledge hypergraph construction, for bottom-up material network discovery.
