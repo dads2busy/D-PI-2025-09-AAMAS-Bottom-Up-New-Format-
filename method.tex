@@ -1,11 +1,16 @@
+% Code facts in Sections~\ref{sec:mekh} and~\ref{sec:pipeline} (tool lists, agent I/O, gates,
+% purge behavior) are verified against lia commit 35456ce99cd70dc011cb7b8e2dbcb6c01ef1b71e
+% (2025-10-07), the last commit on or before the Oct 1--7, 2025 run that generated the MEKHs
+% reported in this paper -- not against the current lia HEAD, which has since removed some
+% MCP tools and changed defaults.
 \section{Material Evolution Knowledge Hypergraphs}
 \label{sec:mekh}
 
-A \emph{Material Evolution Knowledge Hypergraph} (MEKH) is a directed labeled multi-hypergraph $\Hcal(M,E)$~\cite{ouvrardHypergraphsIntroductionReview2020}. Each vertex $m\in M$ is a material identified by a six-digit Harmonized System code~\cite{hscode}; HS-6 is the finest level at which codes are internationally comparable and at which UN Comtrade reports trade, so a MEKH can be joined directly to trade flows (Section~\ref{sec:application}). Each hyperedge $e=(e_s,e_t)\in E$ is an industrial or chemical process $\mathbf{P}_e$ transforming an input set $e_s\subset M$ into an output set $e_t\subset M$; $\ell(e)=\mathbf{P}_e$ labels it, and several processes with the same $(e_s,e_t)$ are distinct parallel hyperedges. A hyperedge carries a narrative description, an LLM-estimated operating-scale score in $[0,1]$, and a list of references, each with a source-quality score, a content-relevance score, and the URL from which an analyst can audit it.
+A \emph{Material Evolution Knowledge Hypergraph} (MEKH) is a directed labeled multi-hypergraph $\Hcal(M,E)$~\cite{ouvrardHypergraphsIntroductionReview2020}. Each vertex $m\in M$ is a material identified by a six-digit Harmonized System code~\cite{hscode}; HS-6 is the finest level at which codes are internationally comparable and at which UN Comtrade reports trade, so a MEKH can be joined directly to trade flows (Section~\ref{sec:application}). Each hyperedge $e=(e_s,e_t)\in E$ is an industrial or chemical process $\mathbf{P}_e$ transforming an input set $e_s\subset M$ into an output set $e_t\subset M$; $\ell(e)=\mathbf{P}_e$ labels it, and several processes with the same $(e_s,e_t)$ are distinct parallel hyperedges. A precursor or product that the generating agent cannot assign a clear HS-6 code (e.g., a minor reagent or a discarded waste stream) is recorded on the hyperedge as a plain name rather than a typed vertex; such untyped materials are excluded from $M$ and from code-set analyses, and Section~\ref{sec:experiments} reports how many hyperedges carry them. A hyperedge carries a narrative description, an LLM-estimated operating-scale score in $[0,1]$, and a list of references, each with a source-quality score, a content-relevance score, and the URL from which an analyst can audit it.
 
 Because vertices are HS-6 codes, purification steps whose input and output share a code (e.g., crude and electronic-grade germanium metal, both HS~811292) appear as self-loops; we keep them, as they are real chokepoints, but they are invisible to code-set analyses.
 
-Algorithm~\ref{alg:tdn-pipeline} gives the outer loop. Starting from seed materials, each iteration calls \textsc{ProcessGeneration}, which queries auxiliary resources $A$ (HS-code search, web search, encyclopedic sources, and the reference cache) for processes that produce or consume known materials, admits those passing the gates of Section~\ref{sec:gates}, and adds their inputs and outputs as new vertices.
+Algorithm~\ref{alg:tdn-pipeline} gives the outer loop. Starting from seed materials, each iteration calls \textsc{ProcessGeneration}, which queries auxiliary resources $A$ (HS-code search, web search, encyclopedic sources, and the reference cache) for processes that produce or consume known materials, admits those passing the gates of Section~\ref{sec:gates}, and adds their typed inputs and outputs as new vertices.
 
 \begin{algorithm}[h]
 \caption{Bottom-Up \toolname (System Process Overview)}
@@ -16,7 +21,7 @@ Algorithm~\ref{alg:tdn-pipeline} gives the outer loop. Starting from seed materi
 \STATE $\text{Vertices (Materials)} \gets s$
 
 \FOR{$i = 1, \ldots, n$}
-    \STATE Update Hyperedges from $\text{ProcessGeneration}(\text{Vertices}, V)$
+    \STATE Update Hyperedges from $\text{ProcessGeneration}(\text{Vertices}, A)$
     \STATE Each hyperedge has input and output sets $e_{s}, e_{t} \subset \mathcal{V}$
     \STATE Update Vertices with $e_{s} \cup e_{t}$ for each new process
 \ENDFOR
@@ -28,7 +33,7 @@ Algorithm~\ref{alg:tdn-pipeline} gives the outer loop. Starting from seed materi
 \section{The MP-DNF Agentic Pipeline}
 \label{sec:pipeline}
 
-Figure~\ref{fig:pipeline} shows the tasks of one iteration. Each task is a node in a typed task graph; a task runs one or more of six role-specialized agents, and every agent returns a validated, typed record (Pydantic schema) rather than free text, so that downstream gates can be applied deterministically. Table~\ref{tab:agents} specifies the agents.
+Figure~\ref{fig:pipeline} shows the tasks of one iteration. Each task is a node in a typed task graph; a task runs one or more of six role-specialized agents, and every agent returns a validated, typed record (Pydantic schema) rather than free text, so that downstream gates can be applied deterministically. Table~\ref{tab:agents} specifies the agents; four of the six (classification, finder, manufacturing, merging) share the same MCP tool kit, marked \emph{full kit}: HS-code search, reference-cache search, Wikipedia, web search, and a URL-fetch tool.
 
 \begin{figure}[t]
     \centering
@@ -39,28 +44,28 @@ Figure~\ref{fig:pipeline} shows the tasks of one iteration. Each task is a node 
 
 \begin{table*}[t]
 \centering\small
-\caption{The six agents of MP-DNF. Every agent is an instance of the same LLM with a role-specific system prompt (supplementary material), MCP tools, and a typed output schema. The last column names the deterministic gate applied to its output.}
+\caption{The six agents of MP-DNF. Every agent is an instance of the same LLM with a role-specific system prompt (supplementary material), MCP tools, and a typed output schema. \emph{Full kit} means HS-code search, reference-cache search, Wikipedia, web search, and a URL-fetch tool. The last column names the deterministic check applied to the agent's output, if any; none of these checks verifies HS-6 codes against the official nomenclature.}
 \label{tab:agents}
-\begin{tabular}{p{2.6cm}p{3.6cm}p{3.0cm}p{3.6cm}p{3.6cm}}
+\begin{tabular}{p{2.6cm}p{3.6cm}p{2.2cm}p{4.1cm}p{4.1cm}}
 \toprule
-Agent & Input & MCP tools & Typed output & Deterministic gate \\
+Agent & Input & MCP tools & Typed output & Deterministic check (if any) \\
 \midrule
-Material classification & Seed names; current material set & HS-code semantic search; reference-cache semantic search & \texttt{ResearchMaterial} list: canonical name, HS-6 code, mined flag, aliases, primary uses, HS description & Code must exist in HS-6 nomenclature; duplicates merged by code, names kept as aliases \\
-Material finder & A precursor named by a process but not yet in $M$ & HS-code semantic search; reference-cache semantic search & \texttt{ResearchMaterial} & As above; unresolved names are retained as \emph{suggested} and excluded from $M$ \\
-Manufacturing process & One material $m$; in \emph{edit} mode also its existing processes and their reference scores & HS-code semantic search; reference-cache semantic search & Add/modify/remove instructions carrying \texttt{MaterialProcess}: description, scale, precursors, products, reference URLs & Precursors and products must resolve to codes in $M$ or be sent to the material finder \\
-Process merging & All processes with identical $(e_s,e_t)$ code sets & HS-code semantic search; reference-cache semantic search & One canonical \texttt{MaterialProcess}, combining the best references from the merged inputs & Merge is keyed on code sets only; narratives are never merged across different code sets \\
-Source scorer & A reference URL & --- & Source-quality score $q_s\in[0,1]$ & --- \\
-Reference reviewer & Content fetched by a headless-browser crawler, and the process it is cited for & --- & Content-relevance score $q_c\in[0,1]$ with reason; $q_c=0$ if content cannot be fetched & Process score $= \frac{1}{|R^\star|}\sum_{r\in R^\star} q_c(r)\min(2q_s(r),1)$ over the top references $R^\star$; undefined until all references are reviewed \\
+Material classification & Seed names; current material set & Full kit & \texttt{ResearchMaterial} list: canonical name, HS-6 code, mined flag, aliases, primary uses, HS description & Duplicates merged by exact HS-code match; names kept as aliases \\
+Material finder & A precursor named by a process but not yet in $M$ & Full kit & \texttt{ResearchMaterial} & Same merge-by-code logic as classification \\
+Manufacturing process & One material $m$; in \emph{edit} mode also its existing processes and their reference scores & Full kit & Add/modify/remove instructions carrying \texttt{MaterialProcess}: description, scale, precursors, products, reference URLs; a precursor or product without a clear code may be a plain string & --- \\
+Process merging & All processes with identical $(e_s,e_t)$ code sets & Full kit & One canonical \texttt{MaterialProcess}, combining the best references from the merged inputs & Merge is keyed on exact match of sorted HS-code sets; plain-string materials are ignored by the match, so narratives are never merged across different code sets \\
+Source scorer & A reference URL & Web search; fetch & Source-quality score $q_s\in[0,1]$ & --- \\
+Reference reviewer & Content fetched by a headless-browser crawler, and the process it is cited for & --- & Content-relevance score $q_c\in[0,1]$ with reason; $q_c=0$ if content cannot be fetched & Evidence score $= \frac{1}{|R^\star|}\sum_{r\in R^\star} q_c(r)\min(2q_s(r),1)$ over the top references $R^\star$; defined only once $k_{\min}$ references from $d_{\min}$ distinct domains are reviewed; a process is purged if this score is defined and below $\tau$ \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
 \subsection{Admission gates}
 \label{sec:gates}
-A candidate process becomes a hyperedge only if: (G1) every precursor and product resolves to a valid HS-6 code; (G2) it cites at least $k_{\min}=2$ references from at least $d_{\min}=2$ distinct web domains; (G3) its process score is defined and $\ge\tau$; and (G4) its operating-scale score is at least $0.4$. Processes failing G2--G4 after the maximum number of review rounds are removed by the \emph{purge} task, the only task with no LLM. Gates are the reason the pipeline's errors are auditable: an analyst who doubts a hyperedge can open its references and see why it was admitted.
+Materials are typed with HS-6 codes that the classification and finder agents assign using an HS-code search tool (Table~\ref{tab:agents}); these codes are not independently verified against the official nomenclature, and a precursor or product the manufacturing agent cannot code is recorded as a plain string rather than resolved to a vertex in $M$ (Section~\ref{sec:mekh}). The pipeline's one deterministic, LLM-free step is the \emph{purge} task, which removes a process if (a) its evidence score is defined and below $\tau$, or (b) its operating-scale score is below $0.4$. The evidence score, $\frac{1}{|R^\star|}\sum_{r\in R^\star} q_c(r)\min(2q_s(r),1)$ over the top references $R^\star$, is defined only once at least $k_{\min}=2$ references from at least $d_{\min}=2$ distinct domains have been reviewed; a process whose references are still incompletely reviewed after the maximum number of review rounds is retained with an undefined score rather than purged, and Section~\ref{sec:experiments} reports how often this happens. These two checks are the only deterministic gates on admission; an analyst who doubts a hyperedge can still open its references and see why it survived them.
 
 \subsection{Iteration and modes}
-Process discovery runs in \emph{create} mode for materials with no processes and in \emph{edit} mode otherwise; in edit mode the agent sees the existing processes and their reference scores and may add references, revise inputs/outputs, or remove a process it now judges unsupported. Upstream/downstream expansion sends every unresolved precursor or product to the material finder, and the next iteration discovers processes for the new materials. Iteration stops after $n$ rounds or when no new materials are found.
+Process discovery runs in \emph{create} mode for materials with no processes and in \emph{edit} mode otherwise; in edit mode the agent sees the existing processes and their reference scores and may add references, revise inputs/outputs, or remove a process it now judges unsupported. Expansion sends every unresolved precursor to the material finder (products are not yet routed through this step); the next iteration discovers processes for the newly typed materials. Iteration stops after $n$ rounds.
 
 \subsection{Run configuration}
 \label{sec:runconfig}
