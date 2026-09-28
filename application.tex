@@ -1,7 +1,7 @@
 \section{Application: Criticality and Trade-Disruption Analysis}
 \label{sec:application}
 
-The MEKH is built to be used. This section gives the two analyses the institute's analysts run on it: which materials are structurally critical to a mineral's downstream reach, and what a concentrated exporter's withdrawal would remove.
+The MEKH is built to be used. This section gives the two analyses the institute's analysts run on it: which materials are structurally critical to a mineral's downstream reach, and what a concentrated exporter's withdrawal would remove. The criticality results, the disruption analysis, and the stability study of Section~\ref{sec:evaluation} (RQ3) were computed on MEKHs from an earlier generation run of the same pipeline, before the runs evaluated in Section~\ref{sec:evaluation}; material codes are reported as generated, including 284520 for elemental boron, which the Section~\ref{sec:evaluation} judge classes as a miscoding.
 
 \subsection{Criticality by reachability}
 Each \tool{} is constructed for a base material, e.g., boron, which we denote $m_{base}$; the set of materials that $m_{base}$, in combination with other raw materials, can be transformed into is its \textit{reach}. The criticality of any other material is the reduction in the reach of $m_{base}$ when that material is removed; from a policy perspective, removal could correspond to banning the production and use of that material, and criticality quantifies the cascading effect.
@@ -41,7 +41,7 @@ have the same criticality.
 \begin{table}[h]
 %\vspace{-0.3in}
 %\centering
-\caption{Top 3 critical materials in each \tool{}. In each case, $m_{base}$ is written in bold. The criticality value
+\caption{Top 3 critical materials in each \tool{}, computed on MEKHs from an earlier generation run (not those of Section~\ref{sec:evaluation}); codes as generated, including 284520 for elemental boron, which the Section~\ref{sec:evaluation} judge classes as a miscoding. In each case, $m_{base}$ is written in bold. The criticality value
 for $m_{base}$ is $R(m_{base} \cup \mathtt{Pre}, \Hcal)$.}
 \begin{center}
 % \begin{tabular}{|r|c|} \hline
@@ -91,16 +91,16 @@ Sawdust or wood shavings [440149] & 5 \\
 \end{table}
 
 \subsection{Disruption analysis with UN Comtrade}
-Using the Boron \tool{} and Comtrade data~\cite{UNComtrade2024} for 2024, we
+Using an earlier boron \tool{} and Comtrade data~\cite{UNComtrade2024} for 2024, we
 assess how disruptions in countries dominating the export of key raw
 or intermediary materials (HS 6-digit level) cascade through
 downstream technologies. 
-UN Comtrade~\cite{UNComtrade2024} records bilateral trade by HS code for over 200 reporters; because MEKH vertices are HS-6 codes, the join is exact.
+UN Comtrade~\cite{UNComtrade2024} records bilateral trade by HS code for over 200 reporters; because MEKH vertices are HS-6 codes, the join is by HS code.
 
-For each HS 6-digit code in the MEKH, we identify the top supplier using UN Comtrade trade values and apply a 60\% dominance threshold, i.e. the leading exporter must account for at least 60\% of
+For each HS 6-digit code in that MEKH, we identify the top supplier using UN Comtrade trade values and apply a 60\% dominance threshold, i.e. the leading exporter must account for at least 60\% of
 global exports of that HS code. We then simulate a disruption scenario
 in which the dominant supplier halts all exports of that material, and
-evaluate the downstream effects on dependent HS codes within the Boron \tool{}. Specifically, any HS codes that rely exclusively on the disrupted
+evaluate the downstream effects on dependent HS codes within that boron \tool{}. Specifically, any HS codes that rely exclusively on the disrupted
 precursor are considered fully removed from the network.
 
 The analysis 
@@ -117,7 +117,7 @@ lacks substitute inputs.
 Overall, the results indicate that although most disruptions are
 localized, a few highly concentrated supply nodes, such as Poland’s HS
 280200 and Turkey’s HS 284019, pose significant downstream risks within
-the boron \tool{}.
+that boron \tool{}.
 
 \subsection{Use in practice}
 The pipeline's outputs are used in three ways at the institute. (1)~HS-code groupings derived from MEKHs define the raw and refined material baskets of a separate US--China microelectronics vulnerability analysis (in submission). (2)~The pipeline's material-classification agent, run in a lightweight export mode without full process discovery, maps each of the 73 USGS mineral commodities to its HS-6 code bucket (426 codes in total); joined to UN Comtrade US-import values for 2017--2025, these buckets drive the trade-disruption view of an interactive dependency-network explorer used by researchers at the institute, a companion to a separate top-down technology-decomposition system (in submission). That view computes, per commodity, the import value lost when the top $k$ exporters are removed and a supplier lock-in count, following the multiplex trade-network metrics of the vulnerability analysis in (1). (3)~Full MEKHs are used directly, as in this section, for the mineral-specific cascade questions that neither the commodity buckets nor the top-down decomposition can answer. Uses (1) and (2) depend only on the HS typing; use (3) also depends on the auditable references.
