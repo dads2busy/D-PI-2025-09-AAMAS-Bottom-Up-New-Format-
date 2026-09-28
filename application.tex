@@ -1,7 +1,7 @@
 \section{Application: Criticality and Trade-Disruption Analysis}
 \label{sec:application}
 
-The MEKH is built to be used. This section gives the two analyses the institute's analysts run on it: which materials are structurally critical to a mineral's downstream reach, and what a concentrated exporter's withdrawal would remove. The criticality results, the disruption analysis, and the stability study of Section~\ref{sec:evaluation} (RQ3) were computed on MEKHs from an earlier generation run of the same pipeline, before the runs evaluated in Section~\ref{sec:evaluation}; material codes are reported as generated, including 284520 for elemental boron, which the Section~\ref{sec:evaluation} judge classes as a miscoding.
+The MEKH is built to be used. This section gives the two analyses the institute's analysts run on it: which materials are structurally critical to a mineral's downstream reach, and what a concentrated exporter's withdrawal would remove. Both are computed on the MEKHs evaluated in Section~\ref{sec:evaluation}, with material codes as generated.
 
 \subsection{Criticality by reachability}
 Each \tool{} is constructed for a base material, e.g., boron, which we denote $m_{base}$; the set of materials that $m_{base}$, in combination with other raw materials, can be transformed into is its \textit{reach}. The criticality of any other material is the reduction in the reach of $m_{base}$ when that material is removed; from a policy perspective, removal could correspond to banning the production and use of that material, and criticality quantifies the cascading effect.
@@ -33,91 +33,22 @@ size of the reachable set when $m_i$ is removed.
 \end{definition}
 
 In our analysis of criticality, we always set $m_{start} = m_{base} \cup \mathtt{Pre}$. For each \tool{}, we compute $c(m_i, 
-m_{start}, \Hcal) \forall m_i \in M$ (except for $m_{base}$ itself). Table~\ref{table:criticality} shows
-the top 3 most critical materials for multiple \tool{}s. For a \tool{}, its \textbf{criticality list} is the set $M$ of 
+m_{start}, \Hcal) \forall m_i \in M$ (except for $m_{base}$ itself). For a \tool{}, its \textbf{criticality list} is the set $M$ of 
 its materials, ordered from most critical to least critical. Note that this list is partially ordered, as several materials can
 have the same criticality.
 
-\begin{table}[h]
-%\vspace{-0.3in}
-%\centering
-\caption{Top 3 critical materials in each \tool{}, computed on MEKHs from an earlier generation run (not those of Section~\ref{sec:evaluation}); codes as generated, including 284520 for elemental boron, which the Section~\ref{sec:evaluation} judge classes as a miscoding. In each case, $m_{base}$ is written in bold. The criticality value
-for $m_{base}$ is $R(m_{base} \cup \mathtt{Pre}, \Hcal)$.}
-\begin{center}
-% \begin{tabular}{|r|c|} \hline
-\begin{tabular}{|R{0.8\linewidth}|l|} \hline
-\toprule
-Material [HS Code] & Criticality \\ 
-\midrule
-\textbf{Elemental Boron [284520]} & \textbf{73} \\
-Hydrogen (byproduct) [280410] & 12 \\
-Oxygen [280440] & 9 \\
-Fumed silica [281122] & 8 \\
-% Soda Ash (Sodium Carbonate) [283620] & 8 \\
-% Silicon tetrachloride [281230] & 7 \\
-\midrule
-\textbf{Cobalt ore and concentrates [260500]} & \textbf{61} \\
-Sodium Chloride (in brine solution) [250100] & 8 \\
-Sodium Hydroxide (caustic soda) [281512] & 6 \\
-Water (distilled or deionized) [285100] & 5 \\
-% Sulfuric acid [280700] & 5 \\
-% Hydrogen (elemental, compressed or liquefied) [280410] & 5 \\
-\midrule
-\textbf{Gallium in ores and concentrates [260600]} & \textbf{53} \\
-Lithium bromide [282759] & 7 \\
-Lithium chloride [282720] & 6 \\
-Carbon monoxide [281121] & 5 \\
-% Natural gas [271121] & 5 \\
-% Methyllithium [284530] & 4 \\
-% \midrule
-% \textbf{Quartz (natural silica, silicon ore) [250610]} & \textbf{18} \\
-% Silicon (not less than 99\% purity) [280469] & 6 \\
-% Sodium silicates [283911] & 5 \\
-% Silica sand [250510] & 5 \\
-% Silicon dioxide (synthetic silica gel) [281122] & 4 \\
-% Ferro-silico-chromium [720250] & 3 \\
-\midrule
-\textbf{Germanium metal, unwrought [811292]} & \textbf{40} \\
-Coke (coal-derived, industrial grade) [270400] & 6 \\
-Calcium carbide, industrial grade [284910] & 6 \\
-Sawdust or wood shavings [440149] & 5 \\
-% Carbon monoxide [282410] & 4 \\
-% Lime (Calcium oxide, quicklime) [252210] & 4 \\
-\bottomrule
-%\hline\end{tabular}
-\end{tabular}
-\end{center}
-\label{table:criticality}
-\end{table}
+The vertices are the registered HS-6 materials (Section~\ref{sec:mekh}); untyped materials and unregistered codes are dropped from hyperedges, and a hyperedge left without outputs is dropped. Three modelling rules determine the numbers. (i)~A hyperedge with no input among the vertices (\CritSourcelessEdgesBoron{} of boron's \CritEdgesBoron{}, mostly extraction steps whose inputs are untyped) fires unconditionally, because the empty source set satisfies Definition~\ref{def:reach}; this is why $\mathtt{Pre}$ is small (\CritPreBoron{} material for boron). (ii)~Removing $m_i$ bans it: it leaves $m_{start}$, every hyperedge that consumes it is disabled, and it is never counted as reachable, but the co-products of hyperedges that make it are still produced. (iii)~$m_{base}$ is the refined, unwrought element: HS \CritBaseCodeBoron{} for boron, \CritBaseCodeCobalt{} for cobalt, \CritBaseCodeGallium{} for gallium, and \CritBaseCodeGermanium{} for germanium.
+
+\CriticalityTable
+
+Table~\ref{table:criticality} shows the top three materials of each \tool{} (ties at third place broken by HS code). No single removal costs much of the reach: the most critical material for boron, \CritTopNameBoron{} [\CritTopCodeBoron], removes \CritTopBoron{} of \CritReachBoron{} reachable materials. The top-ranked materials are bulk reagents and utilities---acids, salt, water, chlorine, hydrogen, coal---rather than mineral-specific intermediates; boron's ore, \CritThirdNameBoron{}, is the exception. Rule (i) matters. If hyperedges with no registered input are dropped instead, their products become precursors unless another hyperedge makes them, and $|R|$ shrinks (boron \CritReachBoron{}$\to$\CritReachNoSourcelessBoron{}, cobalt \CritReachCobalt{}$\to$\CritReachNoSourcelessCobalt{}, gallium \CritReachGallium{}$\to$\CritReachNoSourcelessGallium{}, germanium \CritReachGermanium{}$\to$\CritReachNoSourcelessGermanium{}). The top material then changes for boron (\CritTopNameNoSourcelessBoron{} with criticality \CritTopNoSourcelessBoron{}, tied with a second water code) and gallium (\CritTopNameNoSourcelessGallium{} with \CritTopNoSourcelessGallium{}), and stays the same for cobalt and germanium. Criticality values are therefore conditional on how processes with untyped inputs are treated.
 
 \subsection{Disruption analysis with UN Comtrade}
-Using an earlier boron \tool{} and Comtrade data~\cite{UNComtrade2024} for 2024, we
-assess how disruptions in countries dominating the export of key raw
-or intermediary materials (HS 6-digit level) cascade through
-downstream technologies. 
-UN Comtrade~\cite{UNComtrade2024} records bilateral trade by HS code for over 200 reporters; because MEKH vertices are HS-6 codes, the join is by HS code.
+UN Comtrade~\cite{UNComtrade2024} records bilateral trade by HS code; because MEKH vertices are HS-6 codes, the join is by code. We use the 2024 bilateral flows as mirror data: imports recorded by each reporter are attributed to the partner as exporter, and a code's global exports are the sum over all flows. Aggregate reporters (EU, World) are excluded to avoid double counting; aggregate partner codes (regional residuals, bunkers, free zones, areas not elsewhere specified) stay in the total but cannot be the top exporter. A code is \emph{dominated} if its top exporter supplies at least \DisruptThreshold{} of global exports. For each dominated code we simulate that exporter halting it: the code is removed, every hyperedge consuming a removed material is disabled, and a material all of whose producing hyperedges are disabled is removed in turn, until nothing changes; a material that no hyperedge produces is removed only directly. Its \emph{dependents} are the materials removed besides the code itself.
 
-For each HS 6-digit code in that MEKH, we identify the top supplier using UN Comtrade trade values and apply a 60\% dominance threshold, i.e. the leading exporter must account for at least 60\% of
-global exports of that HS code. We then simulate a disruption scenario
-in which the dominant supplier halts all exports of that material, and
-evaluate the downstream effects on dependent HS codes within that boron \tool{}. Specifically, any HS codes that rely exclusively on the disrupted
-precursor are considered fully removed from the network.
+\DisruptionTable
 
-The analysis 
-reveals that while disruptions by Mexico (HS 252922),
-Norway (271121), Turkey (284011), the United States (284020), and
-China (810411) do not propagate further downstream, disruptions by
-Poland (HS 280200) and Turkey (HS 284019) cause significant cascading
-losses. Specifically, the loss of HS 280200 eliminates five dependent
-HS codes, while the disruption of HS 284019 removes
-four HS codes. Additionally, the US, which controls 100\% of HS
-284520, could disrupt both 284520 and its dependent HS 285000, which
-lacks substitute inputs.
-
-Overall, the results indicate that although most disruptions are
-localized, a few highly concentrated supply nodes, such as Poland’s HS
-280200 and Turkey’s HS 284019, pose significant downstream risks within
-that boron \tool{}.
+Of boron's \DisruptCodesBoron{} registered codes, \DisruptInComtradeBoron{} have 2024 trade records and \DisruptDominatedBoron{} are dominated (Table~\ref{table:disruption}), but only \DisruptCascadingBoron{} cascades: halting \DisruptMaxNameBoron{} [\DisruptMaxCodeBoron], of which \DisruptMaxSupplierBoron{} supplies \DisruptMaxShareBoron{}, removes \DisruptMaxDependentsBoron{} further codes (\DisruptMaxDependentsFracBoron{} of the \tool{}), including boric acid, borosilicate glass, ferroboron, and boron-alloyed steel. The other \DisruptLocalBoron{} dominated codes have no dependents. The pattern holds for the other \tool{}s: gallium has \DisruptDominatedGallium{} dominated codes, of which only \DisruptMaxNameGallium{} (\DisruptMaxSupplierGallium{}, \DisruptMaxShareGallium{}) cascades, to \DisruptMaxDependentsGallium{} code; germanium has \DisruptDominatedGermanium{} and cobalt \DisruptDominatedCobalt{}, none cascading. Some rows inherit the code errors of Section~\ref{sec:evaluation}: the germanium \tool{} assigns quicklime the code that the gallium \tool{} uses for gallium oxide. Concentrated supply is thus common but mostly local, and the \tool{} isolates the one boron intermediate, refined borax, whose loss propagates.
 
 \subsection{Use in practice}
 The pipeline's outputs are used in three ways at the institute. (1)~HS-code groupings derived from MEKHs define the raw and refined material baskets of a separate US--China microelectronics vulnerability analysis (in submission). (2)~The pipeline's material-classification agent, run in a lightweight export mode without full process discovery, maps each of the 73 USGS mineral commodities to its HS-6 code bucket (426 codes in total); joined to UN Comtrade US-import values for 2017--2025, these buckets drive the trade-disruption view of an interactive dependency-network explorer used by researchers at the institute, a companion to a separate top-down technology-decomposition system (in submission). That view computes, per commodity, the import value lost when the top $k$ exporters are removed and a supplier lock-in count, following the multiplex trade-network metrics of the vulnerability analysis in (1). (3)~Full MEKHs are used directly, as in this section, for the mineral-specific cascade questions that neither the commodity buckets nor the top-down decomposition can answer. Uses (1) and (2) depend only on the HS typing; use (3) also depends on the auditable references.
