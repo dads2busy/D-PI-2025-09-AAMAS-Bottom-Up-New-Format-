@@ -55,8 +55,8 @@ The ProcessGeneration method referred to in this Algorithm is a strategy that qu
 
 \FOR{$i = 1, \ldots, n$}
     \STATE Update Hyperedges from $\text{ProcessGeneration}(\text{Vertices}, V)$
-    \STATE Each hyperedge has a set of inputs, outputs e_{in}, e_{out} \subset \mathcal{V}$
-    \STATE Update Vertices with $e_{in} \cup e_{out}$ for each new process
+    \STATE Each hyperedge has input and output sets $e_{s}, e_{t} \subset \mathcal{V}$
+    \STATE Update Vertices with $e_{s} \cup e_{t}$ for each new process
 \ENDFOR
 \RETURN $MEKH = (\text{Vertices}, \text{Hyperedges})$ 
 

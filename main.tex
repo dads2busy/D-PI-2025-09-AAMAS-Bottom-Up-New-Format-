@@ -69,6 +69,8 @@ on Autonomous Agents and Multiagent Systems (AAMAS 2026)}{May 25 -- 29, 2026}
 \newcommand{\process}{MP-DNF}
 \newcommand{\processname}{Material Processing Dependency Network Framework}
 \newcommand{\Hcal}{\mathcal{H}}
+\InputIfFileExists{data/eval/eval_numbers}{}{}   % generated evaluation numbers (if present)
+\input{data/eval/eval_placeholders}              % fallbacks for macros not yet generated
 
 % --------------------------------------------------------------------
 % Submission information
@@ -116,7 +118,7 @@ on Autonomous Agents and Multiagent Systems (AAMAS 2026)}{May 25 -- 29, 2026}
 % Title and author metadata
 % --------------------------------------------------------------------
 \newcommand{\PaperTitle}{%
-  An Agentic AI Approach for Material Evolution Knowledge Hypergraph Discovery%
+  Evidence-Grounded Discovery of Critical-Mineral Transformation Networks with LLM Agents%
 }
 
 \title{\PaperTitle}
@@ -130,21 +132,8 @@ on Autonomous Agents and Multiagent Systems (AAMAS 2026)}{May 25 -- 29, 2026}
 % Use this environment for the ACM/AAMAS abstract that appears under the title.
 % Keep it focused on the research contribution, methods, and key results.
 \newcommand{\PaperAbstract}{%
-Supply chain analysis for critical materials often employs top-down methods, tracing backward from finished products. These methods can lack visibility into intermediate dependencies due to proprietary manufacturing and opaque supplier networks. This paper presents a bottom-up agentic AI approach for constructing a ~\toolname{} (\tool{}), an essential building block for supply chain networks that document the transformation of raw materials into advanced technological products.
-
-The approach uses the \processname{} (\process{}), a multi-agent system in which specialized language models iteratively discover, classify, and validate materials and industrial processes. Multiple knowledge sources are integrated via the Model Context Protocol (MCP), including harmonized trade code databases, semantic reference caches, web searches, and structured encyclopedic sources. The resulting networks are represented as directed hypergraphs that capture the multi-input, multi-output nature of industrial processes.
-
-The pipeline begins with seed materials and expands through a documented process, identifying intermediates and transformations, and applying validation based on reference quality. Iterative cycles allow the introduction of new materials, process discovery, validation, and the removal of weakly supported links. A key feature is the explicit identification and tracking of material derivatives, which can be refined in different countries and assigned a unique, harmonized shipping code, supporting more precise supply chain tracking.
-
-Technical contributions include: formalizing supply chain transformations using directed hypergraphs; enabling iterative bottom-up network discovery; deploying LLM agents for scalable extraction and validation; and referencing all process steps for traceability and assessment.
-
-This framework supports mineral pathway analysis, bottleneck detection, and supply chain resilience by revealing alternatives and dependencies that are not readily apparent in top-down mapping. The pipeline, managed through a modular command-line interface, is suited to both research and operational supply chain analysis and construction.
-}
-
-% Use this macro for the internal report executive summary used on the cover page
-% and possibly in an introductory section. Aim at senior leadership and analysts.
-\newcommand{\ExecutiveSummary}{%
-This work introduces a bottom‑up AI framework that maps how raw minerals move through industrial processes to become advanced technologies, providing visibility that traditional top‑down supply chain methods often miss. Instead of relying solely on opaque supplier networks, specialized AI agents systematically discover and validate materials, transformation steps, and intermediate products using multiple trusted data sources. The resulting hypergraph networks expose critical pathways, derivatives, and chokepoints, enabling analysts to spot vulnerabilities, alternative routes, and opportunities for resilience that are not obvious from finished‑product data alone. Delivered as a modular command‑line tool, the system is designed for both research and operational use in mineral pathway analysis, bottleneck detection, and strategic supply chain planning.
+Analysts assessing critical-mineral supply chains work top-down from finished products through supplier records, which hides the intermediate materials and processes where disruptions actually originate. We present MP-DNF, a deployed agentic pipeline that builds a \emph{Material Evolution Knowledge Hypergraph} (MEKH) bottom-up: six role-specialized LLM agents, equipped through the Model Context Protocol with harmonized-trade-code search, web search, and a reference cache, iteratively propose materials and multi-input/multi-output industrial processes, while deterministic gates admit a process only when it is typed by valid HS-6 codes and supported by scored references from independent domains. The pipeline was developed for, and is in use by, analysts at a university national-security policy research institute.
+We evaluate the MEKHs for boron, gallium, germanium, and cobalt without expert annotation: an LLM judge from a different model family than the generator rates \JudgePrecisionAllClaude{} of \JudgeNAll{} hyperedges fully correct (process, inputs/outputs, HS codes); cited references mention both inputs and outputs for \EvidenceFullBoron{} of boron hyperedges; the boron MEKH recovers \RecallLenientBoron{} of curated textbook routes and contains \CoverageMekhOnlyBoron{} HS-6 intermediates absent from the USGS commodity listing. Criticality rankings are stable across independent generations, and coupling the MEKH to UN Comtrade data localizes cascading export-disruption risk to a few concentrated intermediate codes.
 }
 
 % ====================================================================
@@ -178,12 +167,9 @@ This work introduces a bottom‑up AI framework that maps how raw minerals move 
 \input{related}
 \input{method}
 \input{experiments}
-\input{discussion}
+\input{application}
+\input{lessons}
 \input{conclusion}
-
-\section{Code and Data Availability}
-
-The software is available via an anonymized repository for review: \url{https://anonymous.4open.science/r/lia-B773}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
