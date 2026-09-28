@@ -23,7 +23,7 @@ Algorithm~\ref{alg:tdn-pipeline} gives the outer loop. Starting from seed materi
 \FOR{$i = 1, \ldots, n$}
     \STATE Update Hyperedges from $\text{ProcessGeneration}(\text{Vertices}, A)$
     \STATE Each hyperedge has input and output sets $e_{s}, e_{t} \subset \mathcal{V}$
-    \STATE Update Vertices with $e_{s} \cup e_{t}$ for each new process
+    \STATE Update Vertices with the HS-coded members of $e_{s} \cup e_{t}$ for each new process
 \ENDFOR
 \RETURN $\Hcal = (\text{Vertices}, \text{Hyperedges})$
 
@@ -33,7 +33,7 @@ Algorithm~\ref{alg:tdn-pipeline} gives the outer loop. Starting from seed materi
 \section{The MP-DNF Agentic Pipeline}
 \label{sec:pipeline}
 
-Figure~\ref{fig:pipeline} shows the tasks of one iteration. Each task is a node in a typed task graph; a task runs one or more of six role-specialized agents, and every agent returns a validated, typed record (Pydantic schema) rather than free text, so that downstream gates can be applied deterministically. Table~\ref{tab:agents} specifies the agents; four of the six (classification, finder, manufacturing, merging) share the same MCP tool kit, marked \emph{full kit}: HS-code search, reference-cache search, Wikipedia, web search, and a URL-fetch tool.
+Figure~\ref{fig:pipeline} shows the tasks of one iteration. Each task is a node in a typed task graph; a task runs one or more of six role-specialized agents, and every agent returns a validated, typed record (Pydantic schema) rather than free text, so that downstream checks can be applied deterministically. Table~\ref{tab:agents} specifies the agents; four of the six (classification, finder, manufacturing, merging) share the same MCP tool kit, marked \emph{full kit}: HS-code search, reference-cache search, Wikipedia, web search, and a URL-fetch tool.
 
 \begin{figure}[t]
     \centering
@@ -55,17 +55,17 @@ Material finder & A precursor named by a process but not yet in $M$ & Full kit &
 Manufacturing process & One material $m$; in \emph{edit} mode also its existing processes and their reference scores & Full kit & Add/modify/remove instructions carrying \texttt{MaterialProcess}: description, scale, precursors, products, reference URLs; a precursor or product without a clear code may be a plain string & --- \\
 Process merging & All processes with identical $(e_s,e_t)$ code sets & Full kit & One canonical \texttt{MaterialProcess}, combining the best references from the merged inputs & Merge is keyed on exact match of sorted HS-code sets; plain-string materials are ignored by the match, so narratives are never merged across different code sets \\
 Source scorer & A reference URL & Web search; fetch & Source-quality score $q_s\in[0,1]$ & --- \\
-Reference reviewer & Content fetched by a headless-browser crawler, and the process it is cited for & --- & Content-relevance score $q_c\in[0,1]$ with reason; $q_c=0$ if content cannot be fetched & Evidence score $= \frac{1}{|R^\star|}\sum_{r\in R^\star} q_c(r)\min(2q_s(r),1)$ over the top references $R^\star$; defined only once $k_{\min}$ references from $d_{\min}$ distinct domains are reviewed; a process is purged if this score is defined and below $\tau$ \\
+Reference reviewer & Content fetched by a headless-browser crawler, and the process it is cited for & --- & Content-relevance score $q_c\in[0,1]$ with reason; $q_c=0$ if content cannot be fetched & Evidence score $= \frac{1}{|R^\star|}\sum_{r\in R^\star} q_c(r)\min(2q_s(r),1)$ over the top references $R^\star$; defined only once \emph{every} reference on the process is reviewed and $\ge k_{\min}$ of them, spanning $\ge d_{\min}$ domains, qualify as top references; purged if defined and $<\tau$, or if still undefined once every reference is reviewed \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
 \subsection{Admission gates}
 \label{sec:gates}
-Materials are typed with HS-6 codes that the classification and finder agents assign using an HS-code search tool (Table~\ref{tab:agents}); these codes are not independently verified against the official nomenclature, and a precursor or product the manufacturing agent cannot code is recorded as a plain string rather than resolved to a vertex in $M$ (Section~\ref{sec:mekh}). The pipeline's one deterministic, LLM-free step is the \emph{purge} task, which removes a process if (a) its evidence score is defined and below $\tau$, or (b) its operating-scale score is below $0.4$. The evidence score, $\frac{1}{|R^\star|}\sum_{r\in R^\star} q_c(r)\min(2q_s(r),1)$ over the top references $R^\star$, is defined only once at least $k_{\min}=2$ references from at least $d_{\min}=2$ distinct domains have been reviewed; a process whose references are still incompletely reviewed after the maximum number of review rounds is retained with an undefined score rather than purged, and Section~\ref{sec:experiments} reports how often this happens. These two checks are the only deterministic gates on admission; an analyst who doubts a hyperedge can still open its references and see why it survived them.
+Materials are typed with HS-6 codes assigned by the classification, finder, and manufacturing agents using an HS-code search tool (Table~\ref{tab:agents}); these codes are not independently verified against the official nomenclature, and a precursor or product none of them can code is recorded as a plain string rather than resolved to a vertex in $M$ (Section~\ref{sec:mekh}). Deterministic, LLM-free checks recur at several points rather than in one gate: after every process-generation pass, processes with a scale score below $0.4$ are purged; after every reference-review pass, individual references with a content-relevance score below $0.3$ are dropped from their process; and the dedicated \emph{purge} task removes a process whose evidence score is defined and below $\tau$, whose evidence score is still undefined once \emph{every} reference on it has been reviewed (including a process with no references at all), or whose scale score is below $0.4$. The evidence score, $\frac{1}{|R^\star|}\sum_{r\in R^\star} q_c(r)\min(2q_s(r),1)$ over the top references $R^\star$, is defined only once every reference on the process has been reviewed \emph{and} at least $k_{\min}=2$ of them, spanning at least $d_{\min}=2$ distinct domains, qualify as top references; a process with references still unreviewed after the maximum number of review rounds fails this ``all reviewed'' condition and is retained unscored rather than purged, and Section~\ref{sec:experiments} reports how often this happens. An analyst who doubts a hyperedge can still open its references and see why it survived these checks.
 
 \subsection{Iteration and modes}
-Process discovery runs in \emph{create} mode for materials with no processes and in \emph{edit} mode otherwise; in edit mode the agent sees the existing processes and their reference scores and may add references, revise inputs/outputs, or remove a process it now judges unsupported. Expansion sends every unresolved precursor to the material finder (products are not yet routed through this step); the next iteration discovers processes for the newly typed materials. Iteration stops after $n$ rounds.
+Process discovery runs in \emph{create} mode for materials with no processes and in \emph{edit} mode otherwise; in edit mode the agent sees the existing processes and their reference scores and may add references, revise inputs/outputs, or remove a process it now judges unsupported. Expansion routes every coded but unresolved (\emph{suggested}) precursor to the material finder; plain-string precursors and all products are not routed. The next iteration discovers processes for the newly typed materials. Iteration stops after $n$ rounds.
 
 \subsection{Run configuration}
 \label{sec:runconfig}
