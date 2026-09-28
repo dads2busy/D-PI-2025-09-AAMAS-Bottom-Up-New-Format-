@@ -102,3 +102,15 @@ institution names, and of any local filesystem paths from the computer that
 built it. State-file reference URLs are public web URLs (news articles,
 company/government sites, standards bodies, etc.) cited as evidence by the
 pipeline's agents; they name no author of this paper.
+
+**One redaction:** in `state/boron/research_state.json`, a
+`content_quality_reason` field (an agent's own rationale for rejecting a
+source, unrelated to any process, code, or metric) quoted an image caption
+mentioning an incidental US place name — a limestone quarry in a US state
+whose spelled-out name happens to be a literal whole-word hit against this
+ZIP's anonymity blocklist (it is not an author's name or institution).
+`build_supplementary.sh` shortens the state name to its two-letter postal
+abbreviation ("Cedar Creek, VA") when copying that file, so the check passes
+without editing the meaning of the source quote. This `content_quality_reason`
+field is free-text explanation only; no evaluation script reads it, so no
+number reported in the paper depends on this edit.

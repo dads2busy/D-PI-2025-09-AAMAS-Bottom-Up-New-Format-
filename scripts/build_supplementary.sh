@@ -59,20 +59,27 @@ done
 cp "$LIA/scripts/judge_mekh_processes.py" "$OUT/eval/"
 cp "$LIA"/scripts/eval/*.py "$OUT/eval/"
 
-for t in \
-    test_judge_mekh_cli.py \
-    test_criticality.py \
-    test_disruption.py \
-    test_evidence_support.py \
-    test_judge_error_modes.py \
-    test_judge_summary.py \
-    test_known_route_recall.py \
-    test_make_latex.py \
-    test_rank_stability.py \
-    test_topdown_coverage.py \
-; do
-  cp "$LIA/tests/$t" "$OUT/eval/tests/"
+# All tests/test_*.py in $LIA are for scripts/judge_mekh_processes.py or
+# scripts/eval/*.py EXCEPT these two, which are unrelated leftovers
+# (test_cli.py: a stale template test for a `mytool` module that doesn't
+# exist in this codebase; test_stdn_export.py: tests the unrelated Comtrade
+# stdn-export CLI, not the MEKH eval pipeline) — glob and exclude explicitly
+# so a new eval test added later is picked up automatically.
+TEST_EXCLUDE="test_cli.py test_stdn_export.py"
+COPIED_TESTS=()
+for t in "$LIA"/tests/test_*.py; do
+  base="$(basename "$t")"
+  skip=false
+  for x in $TEST_EXCLUDE; do
+    [ "$base" = "$x" ] && skip=true && break
+  done
+  if [ "$skip" = false ]; then
+    cp "$t" "$OUT/eval/tests/"
+    COPIED_TESTS+=("$base")
+  fi
 done
+echo "== Copied eval tests (excluded: $TEST_EXCLUDE) =="
+printf '  %s\n' "${COPIED_TESTS[@]}"
 
 # ---------------------------------------------------------------------------
 # data/ — CSVs, judge transcripts, and the LaTeX macros/tables generated
