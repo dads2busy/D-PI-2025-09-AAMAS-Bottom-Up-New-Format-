@@ -1,0 +1,35 @@
+rank,hs_code,name,criticality,in_reach,in_pre,in_degree,out_degree
+1,270112,Bituminous coal (non-agglomerated),4,0,1,0,4
+2,270400,"Coke (coal-derived, metallurgical/industrial grade)",3,1,0,2,1
+2,270900,Crude petroleum oil,3,0,1,0,3
+4,284910,"Calcium carbide (CaC2), technical/industrial grade",2,1,0,1,1
+5,270600,Coal tar oil,1,1,0,2,1
+5,271012,"Petroleum distillates (not crude, not waste oils)",1,1,0,2,2
+5,271019,Heavy gas oils (from crude oil distillation),1,1,0,2,1
+5,271390,"Atmospheric residue from crude oil (long residue, refinery bottoms, heavy residue)",1,1,0,1,1
+5,271600,"Electricity (electrical energy, as a traded commodity)",1,1,0,5,3
+5,280300,Carbon (carbon blacks and other forms of carbon),1,1,0,4,1
+5,281119,"Sulfur dioxide (SO2), industrial/commercial grade",1,1,0,3,1
+5,282560,"Germanium oxides (mainly germanium dioxide, GeO2)",1,1,0,8,5
+5,282590,"Calcium oxide (quicklime), industrial/technical grade",1,1,0,5,0
+5,290122,"Acetylene gas (C2H2), industrial/commercial grade",1,1,0,2,1
+5,440131,Wood pellets (densified wood fuel),1,1,0,1,1
+5,440149,"Sawdust or wood shavings (not agglomerated, for fuel or other use)",1,0,1,0,1
+5,811299,"Germanium waste and scrap, powders, and wrought forms",1,1,0,4,0
+18,250200,Unroasted iron pyrites (natural pyrite ore),0,0,1,0,1
+18,252100,"Limestone (calcium carbonate, CaCO3), natural/raw (industrial/flux grade)",0,0,1,0,1
+18,260800,Sphalerite ore (as germanium-bearing zinc ore),0,0,0,0,0
+18,261210,Uranium ores and concentrates,0,0,1,0,1
+18,262099,Coal ash and residues containing germanium for extraction,0,0,1,0,4
+18,270119,"Coal (other than anthracite and bituminous, non-agglomerated, including lignite and coke-coal blends)",0,0,1,0,1
+18,271121,Natural gas (gaseous form),0,0,1,0,4
+18,280110,Elemental chlorine (compressed gas or liquefied),0,0,0,2,5
+18,280200,"Sulfur (sublimed, precipitated, or colloidal)",0,0,0,1,2
+18,280410,"Hydrogen gas (compressed or liquefied, high-purity)",0,0,0,6,4
+18,280440,"Oxygen gas (compressed or liquefied, high-purity)",0,0,0,3,5
+18,280610,Hydrochloric acid (aqueous hydrogen chloride),0,0,0,1,4
+18,280700,"Sulfuric acid (H2SO4), industrial/commercial grade",0,0,0,1,3
+18,281219,Germanium tetrachloride (GeCl4),0,0,0,3,1
+18,281410,"Hydrogen sulfide (H2S), commercial grade",0,0,0,1,2
+18,285100,"Water, including steam (for industrial use)",0,0,0,1,7
+18,854990,End-of-life germanium-containing products for recycling,0,0,1,0,6

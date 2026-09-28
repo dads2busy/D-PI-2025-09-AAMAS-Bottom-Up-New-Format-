@@ -1,0 +1,74 @@
+rank,hs_code,name,criticality,in_reach,in_pre,in_degree,out_degree
+1,220190,Raw water (natural or untreated water),30,0,1,0,1
+1,285100,Water (including distilled or demineralized water),30,1,0,2,6
+3,282720,Potassium chloride,24,1,0,2,3
+4,281520,Potassium hydroxide (caustic potash),22,1,0,1,2
+5,280440,Oxygen (compressed or liquefied),20,1,0,1,6
+6,280700,Sulfuric acid (industrial grade),17,1,0,2,7
+7,252800,Natural borates and concentrates (including borax ore),10,0,1,0,1
+7,284019,"Disodium tetraborate (refined borax, other than anhydrous)",10,1,0,1,3
+9,250100,"Sodium chloride (salt, industrial or chemical grade)",7,0,1,0,4
+9,281000,Boric acid and boric oxide (including boron trioxide),7,1,0,1,16
+11,280410,Hydrogen (compressed or liquefied),5,1,0,7,4
+12,252921,"Fluorspar ore (raw mineral, unbeneficiated or mined, typically containing CaF2 and gangue minerals)",4,0,1,0,2
+12,252922,Fluorspar (containing >97% calcium fluoride),4,1,0,2,1
+12,283620,"Sodium carbonate (soda ash, chemical grade)",4,1,0,3,3
+12,290511,"Methanol (methyl alcohol, industrial/commercial grade)",4,1,0,1,5
+16,281512,"Sodium hydroxide (caustic soda, aqueous solution)",2,1,0,1,2
+16,283329,Ferrous sulfate (copperas),2,1,0,3,3
+16,283640,Potassium carbonate,2,1,0,2,2
+16,291211,Formaldehyde (industrial/commercial grade),2,1,0,2,1
+16,720299,Ferroboron,2,1,0,2,1
+16,720449,Ferrous waste and scrap (excluding stainless and alloy steel),2,0,1,0,2
+16,720450,Ferrous remelting scrap ingots,2,0,1,0,1
+16,720711,"Semi-finished non-alloy steel slab (rectangular cross-section, <0.25% carbon)",2,1,0,2,1
+24,251910,Natural magnesite (magnesium carbonate ore),1,0,1,0,8
+24,260111,"Natural iron ore (hematite, magnetite, limonite, ocher, sienna, umber)",1,0,1,0,4
+24,260800,Zinc ores and concentrates,1,0,1,0,1
+24,261400,Ilmenite ore (titanium-iron oxide ore),1,1,0,1,0
+24,271121,Natural gas (in gaseous state),1,0,1,0,2
+24,280430,Nitrogen (compressed or liquefied),1,1,0,1,2
+24,280511,"Sodium or Potassium metal (elemental, refined)",1,1,0,1,1
+24,281111,Hydrofluoric acid,1,1,0,2,4
+24,281121,Compressed or liquefied carbon dioxide (industrial grade),1,1,0,2,2
+24,281290,Boron trifluoride,1,1,0,2,5
+24,281410,Anhydrous ammonia (nitrogen source),1,1,0,2,5
+24,281610,"Magnesium oxide (industrial grade, calcined or fused)",1,1,0,8,1
+24,281700,Zinc oxide (ZnO),1,1,0,1,1
+24,282110,Iron oxides (industrial grade),1,1,0,4,1
+24,282690,Potassium fluoroborate,1,1,0,4,3
+24,283699,"Iron(II) carbonate (processed, chemical or technical grade)",1,1,0,1,2
+24,284011,"Disodium tetraborate (refined borax, anhydrous)",1,1,0,1,0
+24,284020,Other borates (not elsewhere specified),1,1,0,3,0
+24,284030,Sodium perborate and other perborates,1,1,0,1,0
+24,284520,Refined elemental boron (including isotopically enriched forms),1,1,0,4,1
+24,284990,Boron carbide,1,1,0,2,0
+24,285000,Borane (boron hydride) and borane complexes,1,1,0,2,1
+24,285090,Boron nitrate and other inorganic boron compounds,1,1,0,4,0
+24,290919,Chloromethyl methyl ether,1,1,0,2,0
+24,291100,Dimethoxymethane (methylal),1,1,0,1,1
+24,293190,Organic boron compounds (including organoboranes),1,1,0,2,0
+24,320740,Borosilicate glass frit and powder,1,1,0,1,0
+24,390319,Cross-linked polystyrene beads (primary form),1,0,1,0,1
+24,391400,Ion exchange resins (polymeric),1,1,0,1,0
+24,700220,Borosilicate glass (unworked rods and tubes),1,1,0,1,0
+24,720429,Ferrous waste and scrap of alloy steel (excluding stainless),1,0,1,0,1
+24,720690,"Iron in primary (commercial) form (lumps, granules, or ingots)",1,1,0,2,1
+24,720810,"Hot-rolled steel (coils and strips, for pickling)",1,1,0,1,1
+24,722410,Molten carbon or low-alloy steel (semi-finished steel),1,1,0,2,0
+24,722790,Boron-alloyed steel (ferroalloy or special alloy steel containing boron),1,1,0,1,0
+59,250300,Elemental sulfur (crude or purified),0,0,0,1,1
+59,252100,Limestone flux (used for lime/cement and metallurgical purposes),0,0,1,0,2
+59,270112,"Bituminous coal (for coking, other than anthracite or steam coal)",0,0,0,1,4
+59,270400,"Metallurgical coke (blast furnace coke, from bituminous coal)",0,0,0,1,1
+59,280200,"Sulfur, sublimed or precipitated; colloidal sulfur",0,0,0,2,2
+59,281119,Sulfur dioxide (industrial/commercial gas),0,0,0,1,2
+59,290220,"Benzene (pure, commercial grade)",0,0,0,2,2
+59,290230,"Toluene (pure, commercial grade)",0,0,0,1,2
+59,290250,Styrene (monomer),0,0,0,1,0
+59,290260,"Ethylbenzene (monomer, commercial grade)",0,0,0,1,2
+59,290290,"Divinylbenzene (1,4-divinylbenzene or DVB)",0,0,0,1,0
+59,291590,Acetyl chloride (ethanoyl chloride),0,0,1,0,1
+59,310490,"Raw potash ore (sylvinite, halite, carnallite)",0,0,1,0,1
+59,701790,Borosilicate laboratory glassware,0,0,0,0,0
+59,720150,Liquid pig iron,0,0,0,2,3

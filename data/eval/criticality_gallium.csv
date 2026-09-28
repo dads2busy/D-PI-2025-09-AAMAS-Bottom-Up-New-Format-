@@ -1,0 +1,60 @@
+rank,hs_code,name,criticality,in_reach,in_pre,in_degree,out_degree
+1,250100,"Sodium chloride (common salt, halite, industrial salt)",11,0,1,0,5
+2,220110,Pure water (excluding mineral and aerated waters),9,1,0,1,3
+3,280110,Chlorine gas (Cl2),7,1,0,2,4
+3,280410,Hydrogen gas (compressed or liquefied),7,1,0,5,5
+5,280430,"Nitrogen (high purity, electronic grade)",6,1,0,1,2
+5,811299,"Gallium compounds (including gallium arsenide, gallium nitride, gallium oxide, other intermediates)",6,1,0,3,8
+7,281410,"Ammonia (anhydrous, liquefied or in aqueous solution)",5,1,0,1,7
+7,284690,Gadolinium(III) oxide (Gd2O3),5,1,0,5,5
+9,260900,"Tin ores and concentrates (cassiterite, SnO2)",3,0,1,0,2
+10,280300,Industrial carbon (carbon black or amorphous carbon),2,1,0,4,1
+10,280800,Nitric acid,2,1,0,1,2
+10,281111,Hydrogen fluoride (hydrofluoric acid),2,1,0,2,3
+10,281129,Arsenic trioxide (As2O3),2,1,0,1,1
+10,281219,Gallium trichloride (GaCl3),2,1,0,1,3
+10,282590,Gallium(III) oxide (Ga2O3),2,1,0,3,3
+10,290511,"Methanol (methyl alcohol, chemical grade)",2,1,0,2,3
+10,800110,Unwrought tin (high purity),2,1,0,1,1
+18,270112,"Metallurgical coke and bituminous coal (for smelting, reduction)",1,0,1,0,1
+18,270799,Carbon black feedstock oil (heavy petroleum fraction),1,1,0,2,1
+18,270900,Crude petroleum oil,1,0,1,0,1
+18,271019,"Heavy hydrocarbon oil (industrial grade, petroleum or vegetable origin)",1,1,0,3,1
+18,271121,Natural gas (mainly methane),1,0,1,0,4
+18,271390,Atmospheric residue (from crude oil),1,1,0,1,1
+18,280130,Elemental bromine (liquid or gaseous bromine),1,1,0,1,1
+18,280480,"High purity arsenic (unwrought, elemental)",1,1,0,1,3
+18,280530,Unwrought gadolinium metal (high purity),1,1,0,2,1
+18,280610,Hydrogen chloride (anhydrous or in aqueous solution),1,1,0,2,5
+18,281121,Carbon dioxide (industrial gas),1,1,0,1,2
+18,281511,Solid sodium hydroxide (caustic soda),1,1,0,1,1
+18,282612,"Gallium fluoride (e.g., GaF3)",1,1,0,2,0
+18,282619,Gadolinium(III) fluoride (GdF3),1,1,0,2,1
+18,282710,Ammonium chloride,1,1,0,3,1
+18,282739,Gadolinium(III) chloride (GdCl3),1,1,0,2,3
+18,283429,Gallium nitrate,1,1,0,1,4
+18,283620,"Sodium carbonate (soda ash, Na2CO3)",1,1,0,2,1
+18,283699,Gadolinium(III) carbonate (Gd2(CO3)3),1,1,0,3,0
+18,284390,Gallium amalgams (gallium-based liquid metal alloys),1,1,0,1,0
+18,284430,Germanium-68 radioisotope,1,1,0,3,1
+18,284444,Gallium-68 radioisotope (from Ge-68/Ga-68 generator),1,1,0,1,0
+18,284530,"Methyl lithium (CH3Li, organolithium reagent)",1,1,0,1,1
+18,290311,"Methyl chloride (chloromethane, CH3Cl)",1,1,0,2,0
+18,290361,Methyl bromide (bromomethane),1,1,0,2,0
+18,293100,Trimethylgallium (TMGa),1,1,0,2,1
+18,300630,"Gallium-based pharmaceutical/radiopharmaceutical preparations (e.g., gallium citrate, gallium nitrate, radiogallium diagnostic agents)",1,1,0,3,0
+18,310221,Ammonium sulfate (fertilizer grade or industrial chemical),1,1,0,2,1
+18,381800,"Semiconductor doped chemical elements/compounds for electronics (including gallium arsenide, gallium nitride doped, CIGS, etc.)",1,1,0,3,0
+18,440131,"Wood pellets (agglomerated wood fuel, from sawdust and wood waste)",1,1,0,1,1
+18,740200,"Blister copper (semirefined copper, anode copper)",1,1,0,2,1
+18,740319,Unwrought refined copper,1,1,0,2,1
+18,740400,Copper scrap (waste and scrap),1,1,0,1,0
+18,740819,"Copper wire (of refined copper, maximum cross-section not exceeding 6mm)",1,1,0,1,0
+18,790111,Enriched Zinc-68 Metal Target,1,1,0,1,2
+18,800120,Crude tin (black tin),1,1,0,1,0
+18,850511,"Gadolinium gallium garnet, gallium-based garnet magnets",1,1,0,1,0
+18,854159,"Electrical apparatus; photosensitive semiconductor devices, wafers (gallium-based, e.g. gallium arsenide or nitride)",1,1,0,2,0
+56,252921,Fluorspar (calcium fluoride),0,0,1,0,1
+56,260600,Gallium in ores and concentrates (trace by-product in bauxite and zinc ores),0,0,1,0,1
+56,260800,Zinc ores and concentrates,0,0,0,0,0
+56,285000,"Gallium hydride (gallane, GaH3) / digallane",0,0,0,0,0

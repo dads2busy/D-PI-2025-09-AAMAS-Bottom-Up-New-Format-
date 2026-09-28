@@ -1,0 +1,153 @@
+rank,hs_code,name,borda,n_runs_present
+1,281000,Boric acid and boric oxide (including boron trioxide),329,7
+2,284019,"Disodium tetraborate (refined borax, other than anhydrous)",282,7
+3,250100,"Sodium chloride (salt, industrial or chemical grade)",241,7
+4,252800,Natural borates and concentrates (including borax ore),219,7
+5,220190,Raw water (natural or untreated water),208,4
+6,280700,Sulfuric acid (industrial grade),198,6
+7,283620,"Sodium carbonate (soda ash, chemical grade)",198,7
+8,280410,Hydrogen (compressed or liquefied),178,7
+9,270112,"Bituminous coal (for coking, other than anthracite or steam coal)",161,5
+10,281111,Hydrofluoric acid,153,7
+11,280300,"Carbon (industrial, for reduction)",150,5
+12,281410,Anhydrous ammonia (nitrogen source),147,6
+13,252100,Limestone flux (used for lime/cement and metallurgical purposes),126,5
+14,285100,Water (including distilled or demineralized water),123,3
+15,280610,Hydrochloric acid (industrial),117,5
+16,280200,"Sulfur, sublimed or precipitated; colloidal sulfur",111,5
+17,282720,Potassium chloride,109,2
+18,280440,Oxygen (compressed or liquefied),108,3
+19,281290,Boron trifluoride,103,6
+20,281520,Potassium hydroxide (caustic potash),97,2
+21,280110,Elemental chlorine (gas or liquid),96,3
+22,252922,Fluorspar (containing >97% calcium fluoride),95,6
+23,290511,"Methanol (methyl alcohol, industrial/commercial grade)",93,2
+24,282731,Magnesium chloride (industrial grade),86,6
+25,284020,Other borates (not elsewhere specified),83,7
+26,220110,Natural brine or seawater,78,2
+27,283640,Potassium carbonate,78,3
+28,270400,"Metallurgical coke (blast furnace coke, from bituminous coal)",77,5
+29,281820,"Aluminium oxide (Alumina, industrial grade)",74,4
+30,252921,"Fluorspar ore (raw mineral, unbeneficiated or mined, typically containing CaF2 and gangue minerals)",63,1
+31,252210,Calcium oxide (quicklime),61,3
+32,260600,Bauxite (natural aluminium ore),61,4
+33,290220,"Benzene (pure, commercial grade)",59,1
+34,260111,"Natural iron ore (hematite, magnetite, limonite, ocher, sienna, umber)",53,1
+35,290260,"Ethylbenzene (monomer, commercial grade)",53,1
+36,720449,Ferrous waste and scrap (excluding stainless and alloy steel),53,1
+37,281512,"Sodium hydroxide (caustic soda, aqueous solution)",50,3
+38,284520,Refined elemental boron (including isotopically enriched forms),50,7
+39,285000,Borane (boron hydride) and borane complexes,48,6
+40,281119,Sulfur dioxide (industrial/commercial gas),47,2
+41,282619,Sodium tetrafluoroborate,47,2
+42,270600,Coal tar,46,3
+43,810430,Magnesium powder,46,3
+44,270900,"Crude oil (petroleum, unrefined)",45,3
+45,284990,Boron carbide,45,7
+46,251910,Natural magnesite (magnesium carbonate ore),44,3
+47,260800,Zinc ores and concentrates,44,1
+48,271129,"Compressed air (industrial or medical, in cylinders or bulk)",44,1
+49,283329,Ferrous sulfate (copperas),44,1
+50,291211,Formaldehyde (industrial/commercial grade),44,1
+51,720299,Ferroboron,44,1
+52,720711,"Semi-finished non-alloy steel slab (rectangular cross-section, <0.25% carbon)",44,1
+53,251810,Natural dolomite (not calcined or sintered),42,6
+54,251820,Calcined dolomite,42,5
+55,250610,"Natural quartz (silicon dioxide, unprocessed/ground)",39,4
+56,271311,Petroleum coke (not calcined),37,2
+57,283650,Calcium carbonate (industrial grade),37,1
+58,270820,Pitch coke (from coal tar or mineral tar),34,2
+59,280511,"Sodium or Potassium metal (elemental, refined)",34,2
+60,284530,Lithium hydride,33,1
+61,284011,"Disodium tetraborate (refined borax, anhydrous)",32,6
+62,720250,Ferrosilicon (ferroalloy),32,4
+63,281610,"Magnesium oxide (industrial grade, calcined or fused)",29,5
+64,810419,"Magnesium (unwrought, ingots, or lumps)",26,2
+65,282630,"Cryolite (synthetic or artificial, including molten)",24,1
+66,720430,"Ferrous waste and scrap (including mill scale, tinned iron or steel)",24,1
+67,280430,Nitrogen (compressed or liquefied),23,3
+68,282690,Potassium fluoroborate,19,4
+69,281122,"Silicon dioxide (industrial silica, synthetic or high-purity SiO2, not natural sand)",16,3
+70,282590,Calcium hydroxide (slaked lime),16,2
+71,810411,"Magnesium (unwrought, containing at least 99.8% by weight of magnesium)",16,3
+72,251020,Ground natural calcium phosphate (including phosphatic chalk and natural aluminium calcium phosphate),13,1
+73,270810,Coal tar pitch,13,1
+74,271121,Natural gas (in gaseous state),13,5
+75,271600,Electricity (for industrial and commercial supply),13,1
+76,280461,Elemental silicon (unwrought/pure silicon),13,1
+77,280470,Red phosphorus,13,1
+78,280480,Elemental arsenic,13,1
+79,280920,Phosphoric acid (orthophosphoric acid),13,1
+80,281129,Arsenic trioxide (industrial or refined),13,1
+81,283090,Boron sulfide,13,2
+82,283919,"Sodium silicate (water glass, not metasilicate)",13,2
+83,760120,Molten aluminium,13,1
+84,760200,Aluminium scrap,13,1
+85,760310,Aluminium powder,13,1
+86,850164,Wind turbine generator,13,1
+87,850172,"Photovoltaic DC generator panels (solar modules, assembled)",13,1
+88,252220,Slaked lime (calcium hydroxide),10,1
+89,271012,"Naphtha (petroleum), liquid hydrocarbons",10,1
+90,271312,Calcined petroleum coke,10,2
+91,281511,"Sodium hydroxide (caustic soda, solid)",10,1
+92,282530,Vanadium pentoxide (V2O5),10,1
+93,283321,"Magnesium sulfate (including epsomite, kieserite)",10,1
+94,292090,Tetraethyl orthosilicate (TEOS),10,1
+95,720221,Ferrosilicon (ferro-silicon alloys),10,1
+96,760110,"Aluminium (unwrought, not alloyed, purity >99.8%)",9,3
+97,251990,"Magnesium oxide (calcined or light magnesia, not fused, not natural magnesite)",6,2
+98,282520,Lithium aluminium hydride,6,2
+99,285290,Sodium borohydride,6,2
+100,250510,Silica sand (natural),3,1
+101,270799,Carbon black feedstock oils,3,2
+102,271019,"Petroleum residual oil (including vacuum residue, atmospheric residue, fuel oil, not elsewhere specified)",3,1
+103,280130,"Fluorine (elemental, industrial gas)",3,1
+104,281210,Boron trichloride,3,1
+105,281230,"Silicon tetrachloride (tetrachlorosilane, SiCl4, industrial or chemical grade)",3,1
+106,284910,Calcium carbide,3,1
+107,285200,Sodium hydride (industrial or laboratory grade),3,1
+108,290129,"Acetylene (ethyne, C2H2)",3,1
+109,290919,Chloromethyl methyl ether,3,2
+110,720229,Ferrosilicon,3,1
+111,810410,Magnesium (unwrought),3,1
+112,250200,Unroasted iron pyrite ore,0,1
+113,250290,"Magnesium chloride brine (natural, concentrated solution)",0,1
+114,250300,Elemental sulfur (crude or purified),0,1
+115,252810,Crude borate ore (tincal or kernite),0,1
+116,260300,Copper ore concentrate,0,1
+117,261210,Uranium ores and concentrates,0,1
+118,261400,Ilmenite ore (titanium-iron oxide ore),0,1
+119,261790,Arsenopyrite ore,0,1
+120,270111,Anthracite (not agglomerated),0,2
+121,270119,"Other coal (not agglomerated, excluding anthracite and bituminous)",0,2
+122,271390,Vacuum residue (heavy petroleum residue),0,1
+123,281121,Compressed or liquefied carbon dioxide (industrial grade),0,1
+124,281219,Boron trichloride (BCl3),0,1
+125,281700,Zinc oxide (ZnO),0,1
+126,282110,Iron oxides (industrial grade),0,1
+127,283529,Boron phosphate,0,1
+128,283699,"Iron(II) carbonate (processed, chemical or technical grade)",0,2
+129,284030,Sodium perborate and other perborates,0,1
+130,285090,Boron nitrate and other inorganic boron compounds,0,1
+131,290230,"Toluene (pure, commercial grade)",0,1
+132,290250,Styrene (monomer),0,1
+133,290290,"Divinylbenzene (1,4-divinylbenzene or DVB)",0,1
+134,291100,Dimethoxymethane (methylal),0,1
+135,291590,Acetyl chloride (ethanoyl chloride),0,1
+136,293190,Organic boron compounds (including organoboranes),0,1
+137,310490,"Raw potash ore (sylvinite, halite, carnallite)",0,1
+138,320740,Borosilicate glass frit and powder,0,1
+139,380130,Carbonaceous paste for electrodes and furnace linings,0,1
+140,390319,Cross-linked polystyrene beads (primary form),0,1
+141,391400,Ion exchange resins (polymeric),0,1
+142,440121,Wood chips (biomass feedstock),0,1
+143,700220,Borosilicate glass (unworked rods and tubes),0,1
+144,701790,Borosilicate laboratory glassware,0,1
+145,720150,Liquid pig iron,0,1
+146,720429,Ferrous waste and scrap of alloy steel (excluding stainless),0,1
+147,720450,Ferrous remelting scrap ingots,0,1
+148,720690,"Iron in primary (commercial) form (lumps, granules, or ingots)",0,1
+149,720810,"Hot-rolled steel (coils and strips, for pickling)",0,1
+150,722410,Molten carbon or low-alloy steel (semi-finished steel),0,1
+151,722790,Boron-alloyed steel (ferroalloy or special alloy steel containing boron),0,1
+152,841013,"Hydraulic turbines (power exceeding 10,000 kW)",0,1
