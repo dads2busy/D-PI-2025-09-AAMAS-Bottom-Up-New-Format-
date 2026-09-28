@@ -28,3 +28,7 @@
 # Allow images in images/ directory
 !images/
 !images/**
+
+# eval outputs that are large
+data/eval/*.jsonl
+data/eval/state/
