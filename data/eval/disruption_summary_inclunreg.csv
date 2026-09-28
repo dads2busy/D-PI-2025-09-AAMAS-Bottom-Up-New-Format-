@@ -1,5 +1,5 @@
 label,n_codes,n_invalid,n_absent,n_in_comtrade,n_dominated,frac_dominated,n_dominated_cascading,n_dominated_local,total_dependents,max_code,max_name,max_supplier_iso3,max_supplier_name,max_share,max_dependents,max_dependents_frac,dominated_codes,threshold,n_reporters_total
-boron,74,0,2,72,5,0.0694,1,4,8,284019,"Disodium tetraborate (refined borax, other than anhydrous)",TUR,Türkiye,0.7047,8,0.1096,280511:FRA:0 284019:TUR:8 284030:CHN:0 284520:JPN:0 720150:IDN:0,0.6,99
+boron,74,0,2,72,5,0.0694,2,3,12,284019,"Disodium tetraborate (refined borax, other than anhydrous)",TUR,Türkiye,0.7047,9,0.0763,280511:FRA:0 284019:TUR:9 284030:CHN:0 284520:JPN:3 720150:IDN:0,0.6,99
 cobalt,45,0,1,44,0,0.0,0,0,0,,,,,,0,0.0,,0.6,99
-gallium,61,1,0,60,8,0.1333,1,7,1,282590,Gallium(III) oxide (Ga2O3),CHN,China,0.647,1,0.0169,260600:GIN:0 282590:CHN:1 284444:USA:0 284530:USA:0 290311:DEU:0 293100:USA:0 310221:CHN:0 850511:CHN:0,0.6,99
+gallium,61,1,0,60,8,0.1333,1,7,3,282590,Gallium(III) oxide (Ga2O3),CHN,China,0.647,3,0.0333,260600:GIN:0 282590:CHN:3 284444:USA:0 284530:USA:0 290311:DEU:0 293100:USA:0 310221:CHN:0 850511:CHN:0,0.6,99
 germanium,35,0,2,33,2,0.0606,0,2,0,261210,Uranium ores and concentrates,AUS,Australia,0.7008,0,0.0,261210:AUS:0 282590:CHN:0,0.6,99
