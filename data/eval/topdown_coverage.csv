@@ -1,0 +1,5 @@
+label,mekh_codes,usgs_codes,overlap,mekh_only,frac_mekh_only
+germanium,35,4,3,32,0.9142857142857143
+gallium,61,3,2,59,0.9672131147540983
+cobalt,45,9,9,36,0.8
+boron,74,4,4,70,0.9459459459459459

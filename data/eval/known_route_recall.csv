@@ -1,0 +1,5 @@
+label,n_routes,recovered_lenient,recall_lenient,recovered_strict,recall_strict
+germanium,5,2,0.4,0,0.0
+gallium,5,1,0.2,1,0.2
+cobalt,4,1,0.25,0,0.0
+boron,8,6,0.75,4,0.5

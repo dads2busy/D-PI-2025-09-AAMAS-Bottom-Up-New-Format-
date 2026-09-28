@@ -1,0 +1,32 @@
+\begin{table}[t]\centering\small
+\caption{Evidence grounding: share of hyperedges whose cited references mention at least one input and one output (fully grounded), any input or output, and share of references with retrievable content.}
+\label{tab:evidence}
+\begin{tabular}{lrrrr}\toprule
+MEKH & Refs & Retrievable & Any mention & Fully grounded \\\midrule
+Germanium & 207 & 79\% & 90\% & 54\% \\
+Gallium & 334 & 78\% & 93\% & 57\% \\
+Cobalt & 288 & 77\% & 96\% & 68\% \\
+Boron & 733 & 80\% & 95\% & 71\% \\
+\bottomrule\end{tabular}\end{table}
+
+\begin{table}[t]\centering\small
+\caption{Recall of author-curated canonical routes (lenient: shared input and output code; strict: route codes $\subseteq$ hyperedge codes).}
+\label{tab:recall}
+\begin{tabular}{lrrr}\toprule
+MEKH & Routes & Lenient & Strict \\\midrule
+Germanium & 5 & 40\% & 0\% \\
+Gallium & 5 & 20\% & 20\% \\
+Cobalt & 4 & 25\% & 0\% \\
+Boron & 8 & 75\% & 50\% \\
+\bottomrule\end{tabular}\end{table}
+
+\begin{table}[t]\centering\small
+\caption{RQ2: HS-6 codes in each MEKH versus the codes listed for the commodity in the USGS Mineral Commodity Summaries (top-down view).}
+\label{tab:coverage}
+\begin{tabular}{lrrrr}\toprule
+MEKH & MEKH codes & USGS codes & Overlap & MEKH-only \\\midrule
+Germanium & 35 & 4 & 3 & 32 (91\%) \\
+Gallium & 61 & 3 & 2 & 59 (97\%) \\
+Cobalt & 45 & 9 & 9 & 36 (80\%) \\
+Boron & 74 & 4 & 4 & 70 (95\%) \\
+\bottomrule\end{tabular}\end{table}

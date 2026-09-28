@@ -1,0 +1,23 @@
+label,route_id,description,status
+germanium,GE1,Germanium concentrate (zinc residue / fly ash) -> crude GeO2,miss
+germanium,GE2,GeO2 + HCl -> germanium tetrachloride,lenient
+germanium,GE3,Hydrolysis of purified GeCl4 -> high-purity GeO2,miss
+germanium,GE4,Hydrogen reduction of GeO2 -> germanium metal,lenient
+germanium,GE5,Zone refining of germanium metal -> electronic-grade germanium,miss
+gallium,GA1,Gallium recovered from Bayer-process sodium aluminate liquor,miss
+gallium,GA2,Gallium + arsenic -> gallium arsenide (single crystal),miss
+gallium,GA3,Trimethylgallium from gallium trichloride + methylmagnesium/aluminium,miss
+gallium,GA4,Gallium nitride via MOCVD from trimethylgallium + ammonia,miss
+gallium,GA5,Gallium oxide from gallium metal (oxidation/hydroxide calcination),strict
+cobalt,CO1,Copper-cobalt ore -> cobalt hydroxide via hydrometallurgical leaching and precipitation,lenient
+cobalt,CO2,Cobalt hydroxide + sulfuric acid -> cobalt sulfate,miss
+cobalt,CO3,Electrowinning of cobalt sulfate solution -> cobalt cathode metal,miss
+cobalt,CO4,Cobalt sulfate + lithium carbonate -> lithium cobalt oxide (calcination),miss
+boron,B1,Refining of tincal/borate ore to refined borax (disodium tetraborate),strict
+boron,B2,Borax + sulfuric acid -> boric acid (+ sodium sulfate),strict
+boron,B3,Dehydration of boric acid -> boron oxide (B2O3),miss
+boron,B4,Magnesiothermic reduction of B2O3 -> elemental boron,lenient
+boron,B5,Boric acid + ammonia/urea -> hexagonal boron nitride,miss
+boron,B6,Boron oxide + carbon (carbothermal) -> boron carbide,lenient
+boron,B7,Boron trifluoride from boric acid/B2O3 + HF,strict
+boron,B8,Isotopic enrichment of boron-10 from boric acid,strict
