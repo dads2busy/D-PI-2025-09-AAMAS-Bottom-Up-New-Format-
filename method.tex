@@ -43,10 +43,10 @@ Figure~\ref{fig:pipeline} shows the tasks of one iteration. Each task is a node 
 \end{figure}
 
 \begin{table*}[t]
-\centering\small
+\centering\footnotesize
 \caption{The six agents of MP-DNF. Every agent is an instance of the same LLM with a role-specific system prompt (supplementary material), MCP tools, and a typed output schema. \emph{Full kit} means HS-code search, reference-cache search, Wikipedia, web search, and a URL-fetch tool. The last column names the deterministic check applied to the agent's output, if any; none of these checks verifies HS-6 codes against the official nomenclature.}
 \label{tab:agents}
-\begin{tabular}{p{2.6cm}p{3.6cm}p{2.2cm}p{4.1cm}p{4.1cm}}
+\begin{tabular}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{3.6cm}>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}p{3.8cm}>{\raggedright\arraybackslash}p{3.8cm}}
 \toprule
 Agent & Input & MCP tools & Typed output & Deterministic check (if any) \\
 \midrule

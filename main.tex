@@ -36,6 +36,12 @@
 % Custom column type for right-aligned paragraph columns
 \newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
 
+% Set the body font of a generated float macro (e.g. \CriticalityTable)
+% without editing the generated file: #1 = size command, #2 = float macro.
+\makeatletter
+\newcommand{\FloatFont}[2]{\begingroup\def\@floatboxreset{\reset@font#1\@setminipage}#2\endgroup}
+\makeatother
+
 % --------------------------------------------------------------------
 % AAMAS-2026 copyright block (DO NOT CHANGE!)
 % --------------------------------------------------------------------
