@@ -1,17 +1,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%% LaTeX Template for AAMAS-2026 (based on sample-sigconf.tex)
-%%% Prepared by the AAMAS-2026 Publication Chairs based on the version from AAMAS-2025.
+%%% LaTeX Template for AAMAS-2027 (based on sigconf.tex)
+%%% Prepared by the AAMAS-2027 Publication Chairs based on the version from AAMAS-2026.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % --------------------------------------------------------------------
 % Document class
 % --------------------------------------------------------------------
 %%% == IMPORTANT ==
-%%% Use the first variant below for the final paper (including author information).
-%%% Use the second variant below to anonymize your submission (no author information shown).
+%%% Use the first variant below to anonymize your submission (no author information shown).
+%%% Use the second variant below for the final paper (including author information).
 %%% For further information on anonymity and double-blind reviewing,
 %%% please consult the call for paper information:
-%%% https://cyprusconferences.org/aamas2026/submission-instructions/
+%%% https://warwick.ac.uk/fac/sci/dcs/aamas2027/calls/
 
 %%%% For anonymized submission, use this:
 \documentclass[sigconf,anonymous]{acm/aamas}
@@ -43,16 +43,27 @@
 \makeatother
 
 % --------------------------------------------------------------------
-% AAMAS-2026 copyright block (DO NOT CHANGE!)
+% AAMAS-2027 copyright block (do not change!)
 % --------------------------------------------------------------------
+\makeatletter
+\gdef\@copyrightpermission{
+  \begin{minipage}{0.2\columnwidth}
+   \href{https://creativecommons.org/licenses/by/4.0/}{\includegraphics[width=0.90\textwidth]{by}}
+  \end{minipage}\hfill
+  \begin{minipage}{0.8\columnwidth}
+   \href{https://creativecommons.org/licenses/by/4.0/}{This work is licensed under a Creative Commons Attribution International 4.0 License.}
+  \end{minipage}
+  \vspace{5pt}
+}
+\makeatother
+
 \setcopyright{ifaamas}
-\acmConference[AAMAS '26]{Proc.\@ of the 25th International Conference
-on Autonomous Agents and Multiagent Systems (AAMAS 2026)}{May 25 -- 29, 2026}
-{Paphos, Cyprus}{C.~Amato, L.~Dennis, V.~Mascardi, J.~Thangarajah (eds.)}
-\copyrightyear{2026}
-\acmYear{2026}
+\acmConference[AAMAS 2027]{Proc.\@ of the 26th International Conference
+on Autonomous Agents and Multiagent Systems (AAMAS 2027)}{3--7 May 2027}{Hanoi, Vietnam}{M.~Baldoni, F.~Fang, W.~Yeoh, N.~Yorke-Smith (eds.)}
+\copyrightyear{2027}
+\acmYear{2027}
 \acmDOI{}
-\acmPrice{}
+%\acmPrice{}
 \acmISBN{}
 
 \definecolor{Orange}{rgb}{1,0.5,0}
@@ -80,9 +91,12 @@ on Autonomous Agents and Multiagent Systems (AAMAS 2026)}{May 25 -- 29, 2026}
 % Submission information
 % --------------------------------------------------------------------
 %%% == IMPORTANT ==
-%%% Use this command to specify your submission number.
+%%% Use this command to specify your OpenReview submission number.
 %%% In anonymous mode, it will be printed on the first page.
 \acmSubmissionID{}
+
+%%% Use this command to specify the track you want to submit your paper to.
+\submissionType{Research Paper Track}
 
 % --------------------------------------------------------------------
 % Cover page configuration (internal use only)
