@@ -5,7 +5,7 @@ State as of 2026-09-29, branch `aamas2027`. Abstract registration: **2026-10-01 
 ## Already verified (re-run after any edit)
 
 - [x] Page fit: Conclusion and the REFERENCES heading end on page 8 (9 pages total; page 9 is references only).
-- [x] Anonymity: no author, institution, or sponsor names in the PDF text; PDF Author is empty and XMP creator is "Anonymous Author(s)"; `\acmSubmissionID{}` is empty; the empty acknowledgments section does not render.
+- [x] Anonymity: no author, institution, or sponsor names in the PDF text; PDF Author is empty and XMP creator is "Anonymous Author(s)"; `\acmSubmissionID{1150}` is set (OpenReview submission 1150); the empty acknowledgments section does not render.
 - [x] Curated files have a `source` on every row: `data/eval/known_routes.csv` (22 rows), `data/eval/usgs_mcs_hs_codes.csv` (20 rows).
 - [x] Build: `latexmk -pdf -interaction=nonstopmode main.tex` exits 0.
 
@@ -13,7 +13,7 @@ State as of 2026-09-29, branch `aamas2027`. Abstract registration: **2026-10-01 
 
 0. **TL;DR for the submission form:** MP-DNF, a deployed LLM-agent pipeline, maps critical-mineral supply chains bottom-up as HS-coded, evidence-linked hypergraphs that reveal intermediates top-down views miss; an LLM-free audit pinpoints HS coding as its main error.
 
-1. **Register the abstract by 2026-10-01 AoE.** Plain-text abstract (the rendered `\PaperAbstract`, macros expanded):
+1. **[DONE 2026-09-29 — submission 1150] Register the abstract by 2026-10-01 AoE.** Plain-text abstract (the rendered `\PaperAbstract`, macros expanded):
 
    > Critical-mineral supply chains can fail at intermediate processing stages that top-down analysis, working back from finished products, tends to miss. We present MP-DNF, a deployed agentic pipeline that maps these stages bottom-up as a Material Evolution Knowledge Hypergraph (MEKH): six role-specialized LLM agents, equipped through the Model Context Protocol with trade-code search, web search, and a reference cache, propose materials and multi-input/multi-output industrial processes, each typed where possible by Harmonized System (HS) codes so it joins directly to trade data, and each carrying the references an analyst needs to audit it; a deterministic purge drops processes whose reviewed evidence falls short. Analysts at a university national-security policy research institute use its outputs in trade-disruption and vulnerability analyses. For boron, gallium, germanium, and cobalt, MP-DNF surfaces 350 processes; 70 of the boron MEKH’s 74 HS codes are absent from the USGS commodity listing, and coupling it to UN Comtrade data pinpoints refined borax as the concentrated intermediate whose loss cascades furthest. An annotation-free audit finds the processes almost always plausible and mostly grounded in their references, while full correctness, at most 43% under the stricter of two LLM judges, is limited by HS-code assignment, the precise target for the next iteration.
 
