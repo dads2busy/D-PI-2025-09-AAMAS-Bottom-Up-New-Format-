@@ -13,54 +13,83 @@ regenerated at any time from that script plus the code and data it reads.
 - `prompts/` — the system-prompt and agent-instruction sources that were
   actually run to produce the evaluated MEKHs, taken verbatim from the code
   repository at commit `35456ce9` (the commit checked out for the pipeline
-  runs behind this paper's numbers). Agents in this codebase embed their own
-  instructions in Python rather than separate prompt-template files, so both
-  `src/lia/system_prompts/*.py` and `src/lia/research/agents/*.py` are
-  included.
+  runs behind this paper's numbers), with their paths below `src/lia/`
+  preserved. Agents in this codebase embed their own instructions in Python
+  rather than separate prompt-template files, so both
+  `system_prompts/*.py` and `research/agents/*.py` are included.
+  `research/__init__.py` (same commit) holds the Pydantic output schemas the
+  agents return (`ResearchMaterial`, `MaterialProcess`, the add/modify/remove
+  instructions, reference reviews) and `ResearchPipelineOptions`, the
+  pipeline option defaults.
 
-- `eval/` — the evaluation code, taken from the `HEAD` of the code
-  repository's evaluation branch (which post-dates the pipeline runs
-  themselves — these scripts consume the pipeline's output, they do not
-  produce it):
-  - `judge_mekh_processes.py` — drives an LLM judge over every hyperedge of a
-    MEKH and writes one JSON verdict per hyperedge (`data/judge_*.jsonl`) plus
-    a human-readable transcript (`data/judge_*.md`).
-  - `criticality.py`, `disruption.py`, `evidence_support.py`,
-    `judge_error_modes.py`, `judge_summary.py`, `known_route_recall.py`,
-    `rank_stability.py`, `topdown_coverage.py` — compute the paper's other
-    metrics directly from a MEKH's `research_state.json` (or from the judge
-    output), each writing one or more CSVs under `data/`.
-  - `make_latex.py` — turns those CSVs into the LaTeX macros
+- `scripts/` and `tests/` — the evaluation code, taken from the `HEAD` of
+  the code repository's evaluation branch (which post-dates the pipeline runs
+  themselves: these scripts consume the pipeline's output, they do not
+  produce it), laid out as in that repository so that imports such as
+  `from scripts.eval.criticality import ...` work from the ZIP root:
+  - `scripts/judge_mekh_processes.py` — drives an LLM judge over every
+    hyperedge of a MEKH and writes one JSON verdict per hyperedge
+    (`data/judge_*.jsonl`) plus a human-readable transcript
+    (`data/judge_*.md`).
+  - `scripts/eval/criticality.py`, `disruption.py`, `evidence_support.py`,
+    `hs_validity.py`, `judge_error_modes.py`, `judge_summary.py`,
+    `known_route_recall.py`, `rank_stability.py`, `topdown_coverage.py` —
+    compute the paper's other metrics directly from a MEKH's
+    `research_state.json` (or from the judge output), each writing one or
+    more CSVs under `data/`.
+  - `scripts/eval/make_latex.py` — turns those CSVs into the LaTeX macros
     (`data/eval_numbers.tex`) and tables (`data/eval_tables.tex`) that the
     paper cites by name (e.g. `\JudgePrecisionBoronClaude`).
-  - `tests/` — the unit tests for the scripts above.
+  - `scripts/eval/run_all.sh` — the driver that regenerates every output in
+    `data/` with the exact arguments used for the paper. It never calls an
+    LLM: the judge caches `data/judge_*.jsonl` are its inputs. From the ZIP
+    root: `bash scripts/eval/run_all.sh data/state_paths.env` (needs Python
+    with `pyarrow`, and `uv` for the RQ3 script's plotting dependencies; see
+    the script header). Three inputs are not in this ZIP: the HS-6
+    nomenclature file used by `hs_validity.py`, the UN Comtrade 2024 flow
+    extract used by `disruption.py` (about 300 MB), and the fetched
+    reference-content cache used by `evidence_support.py`. When one is
+    missing, `run_all.sh` skips that step and keeps the shipped output
+    rather than overwriting it; set `H6`, `TRADE`/`PARTNERS` to point at
+    your own copies.
+  - `tests/` — the unit tests for the scripts above. Run them from the ZIP
+    root with `python -m pytest tests -q` (Python 3.11+, with `pytest`,
+    `pyarrow`, and, for `test_judge_mekh_cli.py`, `pydantic`,
+    `pydantic-ai` and `python-dotenv`).
 
-- `data/` — the outputs of the `eval/` scripts, run over the MEKHs in
+- `data/` — the outputs of the evaluation scripts, run over the MEKHs in
   `state/`:
-  - `*.csv` — one or more per metric (see `eval/*.py` above for which script
-    produced which file); `known_routes.csv` (curated canonical routes used
-    for recall) and `usgs_mcs_hs_codes.csv` (top-down USGS Mineral Commodity
-    Summaries HS-code mapping used for the top-down coverage comparison) are
-    inputs to the eval scripts rather than outputs, and are included here too.
+  - `*.csv` — one or more per metric (see `scripts/eval/*.py` above for
+    which script produced which file). `known_routes.csv` (curated canonical
+    routes used for recall) and `usgs_mcs_hs_codes.csv` (top-down USGS
+    Mineral Commodity Summaries HS-code mapping used for the top-down
+    coverage comparison) are inputs to the eval scripts rather than outputs;
+    their source citations were drafted with an AI coding assistant and
+    verified by the authors.
   - `judge_*.jsonl` / `judge_*.md` — the raw per-hyperedge judge verdicts and
-    their human-readable transcripts, one pair per (material, judge) unless a
-    judge run is still in progress (see note below).
+    their human-readable transcripts, one pair per (material, judge): both
+    judges rated all 350 hyperedges of the four MEKHs.
   - `eval_numbers.tex`, `eval_tables.tex` — the generated macros/tables the
     paper's LaTeX source pulls its evaluation numbers from directly. Every
-    number in Section "Experiments" traces back through one of these two
-    files to a CSV in this folder, and from there to a script in `eval/` and
-    a `research_state.json` in `state/`.
+    number in Section "Evaluation" (and in the criticality and disruption
+    analysis) traces back through one of these two files to a CSV in this
+    folder, and from there to a script in `scripts/eval/` and a
+    `research_state.json` in `state/`.
+  - `state_paths.env` — points `run_all.sh` at the folders in `state/`.
 
-- `state/` — `research_state.json` for every MEKH the paper reports on:
-  `boron`, `boron.2`–`boron.7` (bootstrap/rank-stability resamples of the
-  boron run), `germanium`, `gallium`, and `cobalt`. This is the pipeline's own
+- `state/` — for every MEKH the paper reports on, `research_state.json` and
+  `research_config.json`: `boron`, `boron.2`–`boron.7` (six further
+  independent generations of the boron MEKH, with the same pipeline version
+  and seed configuration, used for the rank-stability analysis, RQ3),
+  `germanium`, `gallium`, and `cobalt`. `research_config.json` is the run's
+  seed configuration (seed materials and seed reference URLs; identical for
+  the seven boron generations). `research_state.json` is the pipeline's own
   serialized state: every vertex (material, typed with an HS code where
   assigned), every hyperedge (process, with its precursors, products, and
-  cited references), and bookkeeping the pipeline uses to resume a run. Only
-  `research_state.json` is included; the reference-content cache, logs, and
-  database cache the live pipeline also keeps alongside it are large,
-  regenerable from the cited URLs, and not needed to inspect the hypergraph
-  itself, so they are omitted here.
+  cited references), and bookkeeping the pipeline uses to resume a run. The
+  reference-content cache, logs, and database cache the live pipeline also
+  keeps alongside them are large, regenerable from the cited URLs, and not
+  needed to inspect the hypergraph itself, so they are omitted here.
 
 ## Judge setup
 
@@ -71,13 +100,6 @@ pipeline itself, producing the MEKHs in `state/`) was GPT-4.1. Each judge
 rates three boolean criteria per hyperedge (process plausibility,
 input/output correctness, HS-code correctness) plus an overall verdict and a
 written rationale; a hyperedge is "fully correct" only if all three hold.
-
-**Note on judge completeness:** at the time this ZIP was built, the Llama
-judge (`judge_*_llama.jsonl`) had only finished for boron; the Claude judge
-(`judge_*_claude.jsonl`) had finished for all four materials. If you are
-looking at a later rebuild of this ZIP and still see only partial Llama
-coverage, that reflects the state of a long-running local judge job, not a
-missing file.
 
 **Known issue in one judge rationale (verdict unaffected):** in
 `data/judge_boron_claude.jsonl`, the record for process id

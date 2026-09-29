@@ -22,19 +22,23 @@ OUT="$PAPER/supplementary"
 # on branch aamas2027-eval instead, since those evolve after the run).
 PROMPT_COMMIT="35456ce9"
 
-if [ ! -d "$LIA/.git" ]; then
+if [ ! -e "$LIA/.git" ]; then
   echo "ERROR: LIA repo not found at $LIA (set LIA env var to the lia checkout)" >&2
   exit 1
 fi
 
 echo "== Rebuilding $OUT =="
 rm -rf "$OUT" "$PAPER/supplementary.zip"
-mkdir -p "$OUT/prompts" "$OUT/eval/tests" "$OUT/data" "$OUT/state"
+mkdir -p "$OUT/prompts" "$OUT/scripts/eval" "$OUT/tests" "$OUT/data" "$OUT/state"
 
 # ---------------------------------------------------------------------------
-# prompts/ — agent + system-prompt sources AS RUN, from $LIA at $PROMPT_COMMIT
+# prompts/ — agent + system-prompt sources AS RUN, from $LIA at $PROMPT_COMMIT,
+# plus src/lia/research/__init__.py (the Pydantic output schemas and the
+# pipeline option defaults). Paths below src/lia/ are preserved (three of the
+# files are named __init__.py).
 # ---------------------------------------------------------------------------
 for path in \
+    src/lia/research/__init__.py \
     src/lia/system_prompts/__init__.py \
     src/lia/system_prompts/network_agent_system_prompt.py \
     src/lia/system_prompts/preliminary_research_agent_prompt.py \
@@ -49,15 +53,22 @@ for path in \
     src/lia/research/agents/researcher_agent.py \
     src/lia/research/agents/url_scorer_agent.py \
 ; do
-  git -C "$LIA" show "$PROMPT_COMMIT:$path" > "$OUT/prompts/$(basename "$path")"
+  dest="$OUT/prompts/${path#src/lia/}"
+  mkdir -p "$(dirname "$dest")"
+  git -C "$LIA" show "$PROMPT_COMMIT:$path" > "$dest"
 done
 
 # ---------------------------------------------------------------------------
-# eval/ — judge + metric scripts from $LIA HEAD (branch aamas2027-eval),
-# plus their tests
+# scripts/ + tests/ — judge + metric scripts from $LIA HEAD (evaluation
+# branch), laid out as in $LIA so that `from scripts.eval.criticality import …`
+# works from the ZIP root (`python -m pytest tests`), plus run_all.sh, the
+# driver that regenerates every output in data/ with the paper's arguments.
 # ---------------------------------------------------------------------------
-cp "$LIA/scripts/judge_mekh_processes.py" "$OUT/eval/"
-cp "$LIA"/scripts/eval/*.py "$OUT/eval/"
+: > "$OUT/scripts/__init__.py"
+cp "$LIA/scripts/judge_mekh_processes.py" "$OUT/scripts/"
+cp "$LIA"/scripts/eval/*.py "$OUT/scripts/eval/"
+cp "$LIA/scripts/eval/run_all.sh" "$OUT/scripts/eval/"
+[ -f "$OUT/scripts/eval/__init__.py" ] || : > "$OUT/scripts/eval/__init__.py"
 
 # All tests/test_*.py in $LIA are for scripts/judge_mekh_processes.py or
 # scripts/eval/*.py EXCEPT these two, which are unrelated leftovers
@@ -74,7 +85,7 @@ for t in "$LIA"/tests/test_*.py; do
     [ "$base" = "$x" ] && skip=true && break
   done
   if [ "$skip" = false ]; then
-    cp "$t" "$OUT/eval/tests/"
+    cp "$t" "$OUT/tests/"
     COPIED_TESTS+=("$base")
   fi
 done
@@ -90,9 +101,20 @@ cp "$DATA"/judge_*.jsonl "$OUT/data/" 2>/dev/null || true
 cp "$DATA"/judge_*.md "$OUT/data/" 2>/dev/null || true
 cp "$DATA/eval_numbers.tex" "$OUT/data/"
 cp "$DATA/eval_tables.tex" "$OUT/data/"
+# Relocatable state_paths.env for scripts/eval/run_all.sh (the paper repo's
+# own copy holds absolute local paths, so it is not shipped).
+cat > "$OUT/data/state_paths.env" <<'ENV'
+# Sourced by scripts/eval/run_all.sh; points at ../state relative to this file.
+_STATE="$(cd "$(dirname "${BASH_SOURCE[0]}")/../state" && pwd)"
+STATE_B="$_STATE/boron"
+STATE_CO="$_STATE/cobalt"
+STATE_GA="$_STATE/gallium"
+STATE_GE="$_STATE/germanium"
+STATE_B_RUNS="$_STATE/boron $_STATE/boron.2 $_STATE/boron.3 $_STATE/boron.4 $_STATE/boron.5 $_STATE/boron.6 $_STATE/boron.7"
+ENV
 
 # ---------------------------------------------------------------------------
-# state/ — research_state.json only, for the MEKH runs behind the paper's
+# state/ — research_state.json and research_config.json only, for the MEKH runs behind the paper's
 # numbers (no reference_content/, logs/, db_cache/: those are large caches
 # of fetched web pages / logs, not needed to inspect the hypergraph state)
 # ---------------------------------------------------------------------------
@@ -101,6 +123,8 @@ for mekh in boron boron.2 boron.3 boron.4 boron.5 boron.6 boron.7 germanium gall
   if [ -f "$src" ]; then
     mkdir -p "$OUT/state/$mekh"
     cp "$src" "$OUT/state/$mekh/research_state.json"
+    # the run's seed configuration (seed materials and reference URLs)
+    cp "$DATA/state/$mekh/research_config.json" "$OUT/state/$mekh/research_config.json"
   else
     echo "WARNING: missing $src" >&2
   fi
@@ -111,12 +135,13 @@ done
 # ---------------------------------------------------------------------------
 cp "$SCRIPT_DIR/supplementary_README.md" "$OUT/README.md"
 EVAL_HEAD="$(git -C "$LIA" rev-parse --short HEAD)"
+EVAL_BRANCH="$(git -C "$LIA" rev-parse --abbrev-ref HEAD)"
 {
   echo
   echo "---"
   echo
   echo "Built $(date -u +%Y-%m-%dT%H:%M:%SZ) by scripts/build_supplementary.sh."
-  echo "Prompt sources: lia commit \`$PROMPT_COMMIT\`. Eval scripts: lia commit \`$EVAL_HEAD\` (branch aamas2027-eval)."
+  echo "Prompt sources: lia commit \`$PROMPT_COMMIT\`. Eval scripts: lia commit \`$EVAL_HEAD\` (branch $EVAL_BRANCH)."
 } >> "$OUT/README.md"
 
 # ---------------------------------------------------------------------------
