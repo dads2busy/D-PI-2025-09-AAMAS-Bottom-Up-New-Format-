@@ -32,6 +32,7 @@
 \usepackage{ulem}         % underlining and strikethrough
 \usepackage{ragged2e}     % improved ragged text alignment
 \usepackage{enumitem}     % customizable list spacing/margins
+\usepackage{xurl}         % allow \url{} to break at any character, not just after punctuation
 
 % Custom column type for right-aligned paragraph columns
 \newcolumntype{R}[1]{>{\raggedleft\arraybackslash}p{#1}}
@@ -176,6 +177,9 @@ We evaluate the MEKHs for boron, gallium, germanium, and cobalt without expert a
 \PaperAbstract
 \end{abstract}
 
+% Keywords characterising the paper
+\keywords{Knowledge hypergraphs, LLM agents, Supply-chain analysis, Critical minerals, Harmonized System, LLM-as-a-judge evaluation}
+
 % Construct title section
 \maketitle
 
@@ -188,6 +192,9 @@ We evaluate the MEKHs for boron, gallium, germanium, and cobalt without expert a
 \input{application}
 \input{lessons}
 \input{conclusion}
+
+% Balance the two columns on the final page of body text.
+\balance
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
