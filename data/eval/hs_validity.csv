@@ -1,5 +1,5 @@
 label,n_materials,n_materials_hs6_valid,frac_materials_hs6_valid,n_processes,n_invalid_edges,frac_invalid_edges
 boron,74,72,0.9730,129,18,0.1395
 cobalt,45,44,0.9778,71,10,0.1408
-gallium,61,59,0.9672,87,9,0.1034
+gallium,60,59,0.9833,87,9,0.1034
 germanium,35,33,0.9429,63,15,0.2381
