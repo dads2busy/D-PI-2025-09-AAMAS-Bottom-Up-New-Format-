@@ -1,5 +1,5 @@
 label,n_materials,n_processes,n_unscored,n_below_tau,n_untyped_edges,n_unregistered_edges
 boron,74,129,33,0,49,46
-cobalt,45,71,18,0,21,20
 gallium,61,87,35,0,32,30
 germanium,35,63,14,0,12,21
+cobalt,45,71,18,0,21,20

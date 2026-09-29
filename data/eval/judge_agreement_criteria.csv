@@ -1,0 +1,17 @@
+label,criterion,n_both,agreement,cohen_kappa
+boron,process_plausible,129,0.984,0.000
+boron,inputs_outputs_correct,129,0.845,0.401
+boron,hs_codes_correct,129,0.442,-0.027
+boron,overall_correct,129,0.434,0.038
+cobalt,process_plausible,71,1.000,0.000
+cobalt,inputs_outputs_correct,71,0.930,0.583
+cobalt,hs_codes_correct,71,0.732,0.000
+cobalt,overall_correct,71,0.690,0.187
+gallium,process_plausible,87,0.977,0.000
+gallium,inputs_outputs_correct,87,0.759,0.318
+gallium,hs_codes_correct,87,0.494,0.128
+gallium,overall_correct,87,0.460,0.130
+germanium,process_plausible,63,0.984,0.000
+germanium,inputs_outputs_correct,63,0.889,0.182
+germanium,hs_codes_correct,63,0.540,0.116
+germanium,overall_correct,63,0.508,0.103

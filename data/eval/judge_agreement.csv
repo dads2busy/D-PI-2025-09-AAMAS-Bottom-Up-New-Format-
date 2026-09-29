@@ -1,1 +1,5 @@
 label,n_both,agreement,cohen_kappa
+boron,129,0.434,0.038
+cobalt,71,0.690,0.187
+gallium,87,0.460,0.130
+germanium,63,0.508,0.103

@@ -1,0 +1,5 @@
+criterion,n_both,agreement,cohen_kappa
+process_plausible,350,0.986,0.000
+inputs_outputs_correct,350,0.849,0.385
+hs_codes_correct,350,0.531,0.063
+overall_correct,350,0.506,0.110

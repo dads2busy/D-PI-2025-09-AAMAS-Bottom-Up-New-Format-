@@ -31,6 +31,10 @@ boron,claude,wrong_hs_code_and_incomplete_inputs,1
 boron,claude,wrong_hs_code_and_missing_input,1
 boron,claude,wrong_hs_code_and_missing_inputs,1
 boron,claude,wrong_process_name_and_stoichiometry,1
+boron,llama,unknown_hs_code,1
+boron,llama,wrong_hs_code,6
+boron,llama,wrong_precursor,7
+boron,llama,wrong_product,3
 cobalt,claude,duplicate_precursor,1
 cobalt,claude,hs_code_invalid_or_nonspecific,1
 cobalt,claude,hs_code_mismatch,11
@@ -45,6 +49,7 @@ cobalt,claude,missing_precursors,1
 cobalt,claude,missing_precursors_and_duplicated_input,1
 cobalt,claude,missing_precursors_and_hs_mismatch,1
 cobalt,claude,process_description_inaccuracy,1
+cobalt,llama,wrong_precursor,4
 gallium,claude,hs_code_and_output_mismatch,1
 gallium,claude,hs_code_mismatch,20
 gallium,claude,hs_code_mismatch_and_duplicate_precursors,1
@@ -77,6 +82,9 @@ gallium,claude,wrong_hs_code,1
 gallium,claude,wrong_hs_code_for_water_precursor,1
 gallium,claude,wrong_hs_code_product,1
 gallium,claude,wrong_precursor_and_hs_code_mismatch,1
+gallium,llama,wrong_hs_code,4
+gallium,llama,wrong_precursor,7
+gallium,llama,wrong_product,3
 germanium,claude,hs_code_mismatch,25
 germanium,claude,hs_code_mismatch_and_mischaracterized_products,1
 germanium,claude,hs_code_mismatch_precursor,1
@@ -88,3 +96,6 @@ germanium,claude,incorrect_product_hs_code,1
 germanium,claude,input_definition_and_hs_mismatch,1
 germanium,claude,missing_hs_codes,1
 germanium,claude,missing_precursors,1
+germanium,llama,wrong_hs_code,2
+germanium,llama,"wrong_hs_code, partially_correct",1
+germanium,llama,wrong_product,1

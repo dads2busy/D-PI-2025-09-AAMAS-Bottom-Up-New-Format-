@@ -70,3 +70,8 @@ claude,wrong_hs_code_for_water_precursor,1
 claude,wrong_hs_code_product,1
 claude,wrong_precursor_and_hs_code_mismatch,1
 claude,wrong_process_name_and_stoichiometry,1
+llama,unknown_hs_code,1
+llama,wrong_hs_code,12
+llama,"wrong_hs_code, partially_correct",1
+llama,wrong_precursor,18
+llama,wrong_product,7
