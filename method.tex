@@ -10,7 +10,7 @@ A \emph{Material Evolution Knowledge Hypergraph} (MEKH) is a directed labeled mu
 
 Because vertices are HS-6 codes, purification steps whose input and output share a code (e.g., crude and electronic-grade germanium metal, both HS~811292) appear as self-loops; we keep them, as they are real chokepoints, but they are invisible to code-set analyses.
 
-Algorithm~\ref{alg:tdn-pipeline} gives the outer loop. Starting from seed materials, each iteration calls \textsc{ProcessGeneration}, which queries auxiliary resources $A$ (HS-code search, web search, encyclopedic sources, and the reference cache) for processes that produce or consume known materials, admits those passing the gates of Section~\ref{sec:gates}, and adds their typed inputs and outputs as new vertices.
+Algorithm~\ref{alg:tdn-pipeline} gives the outer loop. Starting from seed materials, each iteration calls \textsc{ProcessGeneration}, which queries auxiliary resources $A$ (HS-code search, web search, encyclopedic sources, and the reference cache) for processes that produce or consume known materials, admits those passing the gates of Section~\ref{sec:gates}, and adds as new vertices the HS-coded precursors of each new process that the material finder resolves.
 
 \begin{algorithm}[h]
 \caption{Bottom-Up \toolname (System Process Overview)}
@@ -23,7 +23,7 @@ Algorithm~\ref{alg:tdn-pipeline} gives the outer loop. Starting from seed materi
 \FOR{$i = 1, \ldots, n$}
     \STATE Update Hyperedges from $\text{ProcessGeneration}(\text{Vertices}, A)$
     \STATE Each hyperedge has input and output sets $e_{s}, e_{t} \subset \mathcal{V}$
-    \STATE Update Vertices with the HS-coded members of $e_{s} \cup e_{t}$ for each new process
+    \STATE Update Vertices with the HS-coded precursors in $e_{s}$ of each new process that the material finder resolves
 \ENDFOR
 \RETURN $\Hcal = (\text{Vertices}, \text{Hyperedges})$
 
@@ -69,4 +69,4 @@ Materials are typed with HS-6 codes assigned by the classification, finder, and 
 
 \subsection{Run configuration}
 \label{sec:runconfig}
-All MEKHs in this paper were generated with \GenModel{} (temperature: \GenTemp{}), $n=5$ iterations, $k_{\min}=d_{\min}=2$, and $\tau=\GenTau{}$. Prompts, schemas, and the configuration file are in the supplementary material.
+All MEKHs in this paper were generated with \GenModel{} (temperature: \GenTemp{}), $n=5$ iterations, $k_{\min}=d_{\min}=2$, and $\tau=\GenTau{}$. Prompts, output schemas, pipeline option defaults, and per-run seed configurations are in the supplementary material.
